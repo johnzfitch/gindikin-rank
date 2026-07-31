@@ -5,9 +5,12 @@ Frozen archive accompanying the paper
 > **The Barnes–Gindikin Symbol at Fractional Rank: Continuation Without a
 > Determinant Carrier, Positivity Without a Cone**
 > John Zachary Fitch, Independent Researcher
+> [![ORCID](https://img.shields.io/badge/ORCID-0009--0007--7953--1531-a6ce39?logo=orcid&logoColor=white)](https://orcid.org/0009-0007-7953-1531)
 
-**DOI:** _(assigned on deposit — replace this line with the Zenodo badge)_
-**Commit:** _(replace with the tagged commit hash this archive was cut from)_
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21713316.svg)](https://doi.org/10.5281/zenodo.21713316)
+
+**DOI:** [10.5281/zenodo.21713316](https://doi.org/10.5281/zenodo.21713316) (all versions) — [10.5281/zenodo.21713317](https://doi.org/10.5281/zenodo.21713317) for `v1.0.0` specifically
+**Commit:** [`05f8878`](https://github.com/johnzfitch/gindikin-rank/commit/05f88789e6db22d5ba6413880f3c3ef4256078e6), tagged [`v1.0.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.0.0)
 
 ---
 

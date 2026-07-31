@@ -12,6 +12,11 @@ authors:
     given-names: John Zachary
     email: zack@internetuniverse.org
     affiliation: "Independent Researcher"
+    orcid: "https://orcid.org/0009-0007-7953-1531"
+version: 1.0.0
+date-released: 2026-07-31
+doi: 10.5281/zenodo.21713316
+repository-code: "https://github.com/johnzfitch/gindikin-rank"
 license: MIT
 keywords:
   - Barnes double gamma
@@ -30,4 +35,5 @@ preferred-citation:
     - family-names: Fitch
       given-names: John Zachary
       affiliation: "Independent Researcher"
+      orcid: "https://orcid.org/0009-0007-7953-1531"
   year: 2026
