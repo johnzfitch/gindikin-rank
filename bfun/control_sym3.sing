@@ -1,0 +1,6 @@
+LIB "bfun.lib";
+// 3x3 real symmetric determinant: rank 3, d=1  =>  expect (s+1)(s+3/2)(s+2)
+ring r = 0,(a,b,c,d,e,f),dp;
+poly F = a*d*f - a*e^2 - b^2*f + 2*b*c*e - c^2*d;
+bfct(F);
+quit;

@@ -1,0 +1,24 @@
+{
+  "title": "Verification code and data for: The Barnes-Gindikin Symbol at Fractional Rank",
+  "description": "<p>Exact-arithmetic verification scripts, figure sources, environment lockfile, and complete finite-cutoff data supporting the paper <em>The Barnes-Gindikin Symbol at Fractional Rank: Continuation Without a Determinant Carrier, Positivity Without a Cone</em>.</p><p>The entry point is <code>verify_positivity.py</code>, which recomputes every displayed positivity locus, erosion degree, and tabulated finite-cutoff example of Sections 8-11 in exact rational arithmetic, by algebraic cell decomposition of the real line checked against exhaustive enumeration of all partitions up to the relevant degree.</p>",
+  "creators": [
+    {
+      "name": "Fitch, John Zachary",
+      "affiliation": "Independent Researcher"
+    }
+  ],
+  "license": "MIT",
+  "upload_type": "software",
+  "keywords": [
+    "Barnes double gamma",
+    "Gindikin gamma",
+    "rank continuation",
+    "Bernstein-Sato polynomial",
+    "Wallach set",
+    "Jack polynomial",
+    "Jack z-measure",
+    "symmetric cone",
+    "reproducible research"
+  ],
+  "access_right": "open"
+}

@@ -1,0 +1,14 @@
+# Verification scripts: standard library only.
+# Pinned interpreter for reproducibility of the exact-arithmetic results.
+#
+#   python >= 3.10, < 3.14      (tested on 3.12.3)
+#
+# fractions, math, argparse, itertools are all stdlib. No third-party
+# package is needed to reproduce any positivity claim in the paper.
+
+# Figure regeneration only (figs/make_figures.py):
+matplotlib==3.10.8
+
+# Figure regeneration additionally requires a LuaLaTeX installation with the
+# TeX Gyre Schola and Libertinus Math fonts, since figure labels are typeset
+# through matplotlib's PGF backend. See BUILD.md.

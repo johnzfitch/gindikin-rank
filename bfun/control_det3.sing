@@ -1,0 +1,5 @@
+LIB "bfun.lib";
+ring r = 0,(a,b,c,d,e,f,g,h,i),dp;
+poly F = a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g;
+bfct(F);
+quit;

@@ -1,0 +1,130 @@
+# etch-and-sketch.mplstyle
+# Companion matplotlib style for the Etch & Sketch kits.
+#
+# Drop this file in ~/.config/matplotlib/stylelib/ (or load via plt.style.use)
+# and figures will carry the kit's register: serif typography in TeX Gyre
+# Schola, slate/amber/forest/burgundy palette, cream panel, restrained rules.
+#
+# Usage:
+#   import matplotlib.pyplot as plt
+#   plt.style.use('etch-and-sketch')
+#
+# Or load the file directly:
+#   plt.style.use('/path/to/etch-and-sketch.mplstyle')
+#
+# --- text.usetex (v1.12): this style ships with usetex OFF. ------------------
+# Until v1.11 it shipped `text.usetex : True`, which had two problems:
+#   1. It CRASHED on any TeX install without cm-super -- matplotlib's usetex
+#      preamble does \usepackage{type1ec}, which lives in cm-super, and the
+#      run dies at "Emergency stop" before drawing anything. Raster backends
+#      additionally need dvipng; PS/EPS output needs ghostscript.
+#   2. Even where it worked it did NOT match the paper. Under usetex,
+#      `font.serif` is ignored -- font selection happens inside LaTeX, and the
+#      preamble below loads no font package, so labels came out in Computer
+#      Modern while the document was set in Schola. The style's whole stated
+#      purpose was defeated by the setting meant to achieve it.
+# With usetex off, `font.serif` IS honoured: matplotlib loads TeX Gyre Schola
+# through fontconfig and math is set in matplotlib's own CM mathtext.
+#
+# To opt IN to usetex (for exact LaTeX kerning/microtype in labels), you need
+#   cm-super            (type1ec.sty)        tlmgr install cm-super
+#   tex-gyre            (tgschola.sty)       tlmgr install tex-gyre
+#   dvipng              (raster backends)    apt-get install dvipng
+# and then set, in your own script AFTER loading this style:
+#   plt.rcParams['text.usetex'] = True
+#   plt.rcParams['text.latex.preamble'] = (
+#       r'\usepackage{amsmath}\usepackage{amssymb}'
+#       r'\usepackage[T1]{fontenc}\usepackage{tgschola}')
+# The tgschola line is the part that actually makes the labels match the paper.
+
+# --- Typography
+text.usetex          : False
+text.latex.preamble  : \usepackage{amsmath}\usepackage{amssymb}
+font.family          : serif
+# mathtext.fontset : cm  -- Computer Modern math. This is matplotlib's best
+# serif math WITHOUT a TeX run, and it does NOT match the document, whose math is
+# Libertinus Math (or STIX Two, or Latin Modern Math). For a figure whose labels
+# are words and numbers that is invisible; for a figure carrying real notation it
+# is the "typographically foreign" defect SKILL.md names. Use
+# es_style(backend="pgf") there -- same engine as the document, same math font.
+mathtext.fontset     : cm
+mathtext.rm          : serif
+font.serif           : TeX Gyre Schola, Computer Modern Roman, DejaVu Serif
+font.size            : 9.0
+axes.labelsize       : 9.0
+axes.titlesize       : 10.0
+xtick.labelsize      : 8.0
+ytick.labelsize      : 8.0
+legend.fontsize      : 8.0
+figure.titlesize     : 11.0
+
+# --- Figure sizing (golden ratio for single-column publication width)
+figure.figsize       : 5.5, 3.4
+figure.dpi           : 110
+savefig.dpi          : 300
+savefig.bbox         : tight
+savefig.format       : pdf
+savefig.transparent  : False
+savefig.facecolor    : white
+
+# --- Font embedding (v1.12). matplotlib's default pdf.fonttype is 3, and
+# Type 3 fonts are rejected or flagged by most journal/preprint pipelines
+# (arXiv, IEEE, ACM) and search/copy badly in the resulting PDF. 42 embeds
+# the actual TrueType/Type42 outlines instead.
+pdf.fonttype         : 42
+ps.fonttype          : 42
+
+# --- Color cycle (Etch & Sketch palette: blue, amber, forest, burgundy, grey)
+axes.prop_cycle      : cycler('color', ['4A6E8A', 'C97D2C', '4A6B4F', '8C3A3A', '6A7986', '2C3E50'])
+
+# --- Axes
+axes.facecolor       : FAF7F0
+axes.edgecolor       : 6A7986
+axes.linewidth       : 0.6
+axes.grid            : True
+axes.grid.axis       : y
+axes.axisbelow       : True
+axes.spines.top      : False
+axes.spines.right    : False
+axes.titlepad        : 8.0
+axes.labelpad        : 4.0
+axes.labelcolor      : 2C3E50
+
+# --- Grid (subtle, doesn't fight the data)
+grid.color           : E8EAEC
+grid.linewidth       : 0.4
+grid.linestyle       : -
+grid.alpha           : 0.8
+
+# --- Ticks (inward, thin — matches academic register)
+xtick.direction      : in
+ytick.direction      : in
+xtick.major.size     : 3.0
+xtick.minor.size     : 1.5
+xtick.major.width    : 0.5
+xtick.minor.width    : 0.4
+ytick.major.size     : 3.0
+ytick.minor.size     : 1.5
+ytick.major.width    : 0.5
+ytick.minor.width    : 0.4
+xtick.color          : 6A7986
+ytick.color          : 6A7986
+
+# --- Lines and markers
+lines.linewidth      : 1.4
+lines.markersize     : 5.0
+lines.markeredgewidth: 0.5
+patch.linewidth      : 0.4
+patch.edgecolor      : 2C3E50
+
+# --- Heatmaps (Anthropic QK-panel register: red-blue diverging or blue sequential)
+image.cmap           : RdBu_r
+image.interpolation  : nearest
+
+# --- Legend
+legend.frameon       : True
+legend.framealpha    : 0.95
+legend.edgecolor     : 6A7986
+legend.facecolor     : white
+legend.fancybox      : False
+legend.borderaxespad : 0.4

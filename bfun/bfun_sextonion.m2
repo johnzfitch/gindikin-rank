@@ -1,0 +1,6 @@
+-- Bernstein-Sato polynomial of the split-sextonion cubic norm on H_3(S)
+needsPackage "Dmodules";
+R = QQ[u1..u21];
+f = u1*u2*u3-u1*u4*u5+u1*u6*u7-u10*u11*u2+u10*u16*u4+u10*u18*u7+u11*u17*u5+u11*u19*u6+u12*u13*u2+u12*u17*u7+u12*u19*u4+u13*u16*u6+u13*u18*u5-u16*u17*u3+u18*u19*u3;
+b = globalBFunction f
+factorBFunction b

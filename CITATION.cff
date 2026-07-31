@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite the paper below."
+title: "Verification code and data for: The Barnes-Gindikin Symbol at Fractional Rank"
+abstract: >-
+  Exact-arithmetic verification scripts, figure sources, and complete
+  finite-cutoff data supporting the paper "The Barnes-Gindikin Symbol at
+  Fractional Rank: Continuation Without a Determinant Carrier, Positivity
+  Without a Cone".
+type: software
+authors:
+  - family-names: Fitch
+    given-names: John Zachary
+    email: zack@internetuniverse.org
+    affiliation: "Independent Researcher"
+license: MIT
+keywords:
+  - Barnes double gamma
+  - Gindikin gamma
+  - rank continuation
+  - Bernstein-Sato polynomial
+  - Wallach set
+  - Jack polynomial
+  - Jack z-measure
+preferred-citation:
+  type: article
+  title: >-
+    The Barnes-Gindikin Symbol at Fractional Rank: Continuation Without a
+    Determinant Carrier, Positivity Without a Cone
+  authors:
+    - family-names: Fitch
+      given-names: John Zachary
+      affiliation: "Independent Researcher"
+  year: 2026
