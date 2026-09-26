@@ -34,7 +34,7 @@ the Git commit it was cut from. Regenerate with `python3 tools/manifest.py`.
 | `gindikin-rank.pdf` | 676112 | `d17236e305d42b8a...` | Compiled paper, 54 pages. |
 | `gindikin-rank.tex` | 187849 | `ef95047f933703e5...` | Paper source. LuaLaTeX; see BUILD.md for the toolchain. |
 | `LICENSE` | 1359 | `3979e8f85623b942...` | CC BY 4.0 for the paper, MIT for the code. |
-| `README.md` | 5991 | `41add8aa5d396acb...` | Orientation, quick start, layout, and what is and is not verified. |
+| `README.md` | 6157 | `80011143a564e690...` | Orientation, quick start, layout, and what is and is not verified. |
 | `recompute_table.py` | 7956 | `c655ce07fee6f746...` | Standalone regeneration of Table 1 from scratch. |
 | `requirements.txt` | 806 | `23b0f4a3cb22fe01...` | Pinned environment. Core verification is standard library only; the Figure 3 suite and the census need SymPy. |
 | `tools/manifest.py` | 530 | `ee0e060a752d32cd...` | Regenerates this manifest. |
@@ -53,7 +53,7 @@ e641757b2b90a211c5b01322bcd1eebb150300b8d2b56da152a61e4f1b645653  .gitattributes
 5e285d06dde2507375c8d9192ef563d478338a5b4d644c7130c9ac1a4ef7a23c  BUILD.md
 cd417dfa12940468788b34be21b6f391a4fc3bdb9b72704eec95d3f79f054653  CITATION.cff
 3979e8f85623b9426bc3db21222098a7d7363316d07d09fa85bb4a4cbca89958  LICENSE
-41add8aa5d396acbcf07e3c8f928d61a51b7839856e73bab4642f896b607c62b  README.md
+80011143a564e690d9623aca1cb4a3b1cf6d756930e410b0cd6d0c2a57ff162d  README.md
 0ba106eec588dd0dcf6c591e3243b142fde3037663577b972cd1976906c6b7ae  ancillary_census.py
 2e36ee72933c5efec3e11f71161fcae1c3aa5628de08a93ebd4f5ca1395c04e1  bfun/bfun_sextonion.m2
 02429ee4c2ad484afb9e32c0105999d89cc825891bdd100af2a34468a614430e  bfun/bfun_sextonion.rr
