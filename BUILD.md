@@ -669,3 +669,408 @@ still in the main text. All four move correct material out of a correct paper fo
 reasons of pace; they are judgement calls about the author's voice rather than
 defects, and are left for a decision rather than made silently. The reviewer
 explicitly agrees the paper should **not** be split.
+
+
+## Revision 8 (this build)
+
+The merged repair specification `merged-review-repair-spec.md` applied. Built with
+Etch & Sketch v2.3 under TeX Live 2023 (`lualatex`), four passes: **59 pages, 0
+errors, 0 overfull boxes, 0 underfull boxes, 0 undefined or multiply-defined
+references.** No Type 3 fonts. `tools/pagecheck.py` reports **no page-break
+issues**, where the pre-revision source reported one stranded heading on p53.
+
+### What was already done
+
+Most of the merged specification had already landed in Revision 7, which applied
+the same review under the name `review-last11`. This was checked against the
+source rather than taken from the changelog: Stage A (R-01, R-P1, R-P2, R-P4,
+R-P8, R-P9), Stage B (R-02, R-03), R-04, R-S8, all of Stage D, all of Stage E,
+R-F1, R-F3, and all four Stage G upgrades were verified present. What remained
+was Stage C, which is exactly what Revision 7 filed under *Not done*.
+
+### Structure
+
+- **The introduction is rebuilt.** Section 1.3's seven `\paragraph` mini-summaries
+  are replaced by four paragraphs: construction and exact functional equations;
+  termination and the polynomial-carrier obstruction; then the reviewer's own two
+  paragraphs verbatim, the hinge (*"the loss of a determinant does not force
+  positivity to disappear"*) and the positivity overview. The section loses its
+  theorem-level previews and about a page. The organization paragraph in 1.4 loses
+  the sentence the fourth paragraph now covers.
+
+  Note on locating the reviewer's target: the second review anchored its
+  replacement to three strings, `Thus`, `the same affine root data`, and a
+  trailing outline sentence. Only the last two are in the current build, and they
+  are in the Section 8 bridge, not the introduction. The two reviews were reading
+  different drafts. The replacement text is introduction register and the merge
+  places it as paragraphs 3 and 4 of 1.3, so that is where it went; the Section 8
+  bridge is untouched.
+
+- **The Ruijsenaars crosswalk moved.** The two-page notation reconciliation inside
+  the proof of Proposition 7.7 is now **Lemma 7.6** (*Sectorial continuation of the
+  Barnes remainder*), which states only what the proof consumes -- holomorphic
+  continuation of the truncated remainder to `C \ (-inf,0]` and the
+  `O(|a|^{-M-1})` bound on `|arg a| <= pi - delta` -- plus **Appendix A**, an
+  eleven-row translation table. The half-sector computation stays in the body,
+  since it identifies the coefficients from this paper's normalization rather than
+  importing them.
+
+- **Section 9.5 trimmed.** The three conceptual archetypes are kept: odd-`d` upper
+  edge erosion, lower-edge erosion, and one-step erosion halted by a rank-null
+  ideal. The exact inertia count at `(3/2,8)`, cutoff 6, and the two receipts on
+  either side of the `nu = 1` threshold now point at the ancillary data. Table 1
+  is **not** moved: the specification lists "the extended census" among the
+  material to relocate, but the only thing answering to that description is
+  Table 1, which R-03 in the previous round explicitly rebuilt and enlarged.
+  Moving it would undo a blocker fix. Flagged rather than guessed.
+
+- **Section 12 consolidated** into *The Separation*, *Interpretation and
+  Limitations*, and *Open Problems*. The four remarks fold into the second, except
+  Remark 12.2, which keeps its identity under the title it was given last round.
+
+### Mathematics added
+
+Both are consequences of Theorem 10.8 and Theorem 11.1 that the specification
+asked to be recorded and that were not in the source.
+
+- **Corollary 10.9** (*Finite certificate*). At rational step,
+  `W_infinity(r,d) = intersection over a finite family F(r,d) of {s : pi_lambda(s) >= 0}`.
+  Immediate from Theorem 10.8. This is where the effectivity gap sits: existence
+  of a certificate without a bound on its degree.
+- **Corollary 10.10** (*The stabilization degree is self-dual*).
+  `N_0(-rD, 4/d) = N_0(r,d)` whenever either side is defined, because partition
+  conjugation preserves degree and so matches the loci cutoff by cutoff. This says
+  the effectivity gap is one problem and not two, and Section 12's open problems
+  now say so.
+
+### Terminology and front matter
+
+`Cell-lattice chamber positivity` and `The Cell Lattice Generates a Principal
+Rank-Null Ideal` were the two surviving places where the content set was still
+called a lattice; both renamed. Section 1.1 still carried
+*"Throughout, N denotes an integer rank and r a complex one"*, which contradicts
+the Part I / Part II convention installed two paragraphs above it; the clause is
+gone and the Jordan-algebra scope guard kept. The keyword list is the reviewer's
+seven.
+
+### Figures
+
+**Figures are renumbered**, because the new figure lands in Section 9.1 and
+therefore takes the number 3. The files are renamed to match, so a filename and a
+figure number never disagree again:
+
+| file | figure | section |
+|---|---|---|
+| `fig1-cocycle-split.pdf` | 1 | 4 |
+| `fig2-divisor-cancellation.pdf` | 2 | 5 |
+| `fig3-cone-strata.pdf` | 3 | 9.1 (new) |
+| `fig4-positivity-loci.pdf` | 4 | 9.5 (was fig3) |
+| `fig5-erosion-staircase.pdf` | 5 | 10 (was fig4) |
+
+- **Figure 3 is new.** It is the only figure in the paper that draws a
+  correspondence rather than a computation. Left panel: at integer rank `R = 3`
+  the Riesz distribution is a positive measure exactly on the Wallach set
+  (Faraut--Koranyi Thm. VII.3.1), and at a ladder point `s = jD` its support is
+  the closure of the rank-`j` orbit (Prop. VII.2.3), so `s |-> supp R_s` carries
+  the ladder onto the flag `{0} < O_1-bar < boundary` and the ray onto the
+  interior. Right panel: at `r = 3/2` there is no cone, hence no interior stratum
+  for a ray to be supported on, and what survives is the retained grid, the band,
+  the balanced point and the cap. The ray is drawn as the hollow channel it used
+  to occupy. This is the paper's subtitle in one picture, and it was the one thing
+  the figure set did not show: the geometry the argument is *against*.
+
+  Both panels are checked. See `verify_figure3.py`.
+
+- **Figure 4** (the loci) now carries, on each fractional row, the integer-rank ray
+  that row lost, drawn as a hollow channel from the top of its locus to the right
+  edge. The amputation was previously visible only by comparing rows across a
+  hairline; it is now on the row. The two blocks are also named on the figure
+  rather than in the fifth sentence of the caption.
+
+- **Figure 1** draws the `(2*pi)^{h r q}` normalization as an `r` by `q` rectangle
+  labelled with its area, so the one term that was pure bookkeeping is now a
+  measurement. It also gains the axis arrowhead the other four figures have.
+
+Palette discipline in Figure 3 follows the file's documented semantics: blue is
+the object being tracked, so it is the interior -- the thing fractional rank
+removes; the three boundary strata are ink at three weights; wine is the
+obstruction, hence the lost ray; amber is the cap; forest is the balanced point.
+
+### Verification
+
+`verify_figure3.py` is new and is wired into `verify_positivity.py`, which is
+still the whole interface. It checks the figure's two panels by different means,
+because they rest on different things. The left panel's classical dictionary is
+not recomputable from this paper's machinery, so what is checked is the weaker
+statement the figure needs: that the paper's own integer-rank theorem reproduces
+the ladder-plus-ray the flag is paired with. The right panel is checked mark by
+mark against the locus routine -- retained grid, band at cutoff `k+1`, balanced
+point strictly interior, cap retained, and 29 probes above the cap confirming the
+ray is absent -- at each of `d = 2, 4, 6, 8`. A final group checks the caption's
+own hedge, that the band is stable at `d = 2, 4` and erodes at `d = 6, 8`, so that
+drawing `W_pre` rather than `W_infinity` is necessary and is what the caption
+says. 28 checks, all pass.
+
+One test failure worth recording, because it was again the test and not the
+paper. The erosion group first compared `locus()` output as a whole tuple and
+reported `d = 2` and `d = 4` as eroding. `locus()` returns
+`(isolated points, closed intervals, breakpoints)`, and the third component is
+the stratification the routine searched, which necessarily grows with the cutoff.
+The loci were identical. Comparing only the first two components passes. This is
+the third time a first-draft test has failed against a correct paper.
+
+`verify_positivity.py` now runs four suites plus the extra checks: 83 checks,
+all pass. One of them independently confirms the new Corollary 10.10 --
+`s in W_N(r,d)` iff `-s/D in W_N(-rD, 4/d)` at every cutoff, 2184 probes, 0
+violations.
+
+### Not verified
+
+The figures were generated and checked programmatically -- text extraction from
+the built PDF confirms every label, and a pixel scan of the rendered raster
+confirms the position and colour of every mark -- but they were **not visually
+inspected** in this session. Look at Figure 3 before trusting it.
+
+### Still blocked
+
+The DOI and the tagged commit hash for the supplementary-material paragraph.
+`README.md` still carries both placeholders.
+
+
+## Revision 9 (this build)
+
+Review item 8, the Bergman--Wallach branch, landed as **Section 8.5**. Built with
+Etch & Sketch v2.3: **61 pages, 0 errors, 0 overfull, 0 underfull, 0 undefined or
+multiply-defined references**, no page-break issues.
+
+### Why it belongs here, and what changed on the way in
+
+The item was written against the Gibbs-chart manuscript -- the sentence it
+quotes, about a convexity proof that "needs no identification of a distinguished
+Gram entry with a full Bergman kernel", is that paper's, not this one's, and this
+paper has no convexity proof and no Bergman anything. Two of the item's three
+parts therefore had no target here: there was no exclusion sentence to repair,
+and this paper never made the scalar mistake, since Proposition 8.2 already works
+with the whole Gram matrix.
+
+The third part is the one that fits, and it fits more tightly than the item
+claims. Proposition 8.2 makes `G_N(r,s)` **diagonal** in the Jack basis, so the
+matrix inverse the item asks for is immediate and the reproducing kernel of the
+model is a sum over partitions with the pivots in the denominators. That kernel
+is the object the Wallach set is classically defined by -- Faraut--Koranyi
+Ch. XIII.2 defines the set as the parameters at which the weighted kernel is of
+positive type -- so the paper's `W_N(r,d)` was already a continuation of a
+positive-type locus without saying so.
+
+The item calls the correspondence between discrete Wallach points and
+multiplicity collapse an analogy and recommends recording it as an open problem.
+In this paper it is a **theorem**, and its proof is already inside the proof of
+Theorem 8.4, in the ladder-points step, unextracted. Recording it as open would
+have understated what the paper proves.
+
+The item's labelling also needed one correction. It proposes discrete Wallach
+points against *one-dimensional* Bergman collapse. The correct statement is
+graded: the `j`-th ladder point collapses the model to `j` rows, and
+one-dimensional is the case `j = 1`.
+
+### What was installed
+
+- **Definition 8.6**, the reproducing kernel `B_{N,r,s}` of the model, with the
+  sum form immediate from diagonality of `G_N`. Named a reproducing kernel rather
+  than a Bergman kernel: in Faraut--Koranyi the Bergman kernel is the member of
+  the family at one distinguished parameter, and calling the whole family Bergman
+  would be loose. The relation to `det G_N` of (gram) and to `W_N` of (loci) is
+  two sentences and no argument.
+
+- **Remark 8.2**, that a single Gram entry constrains nothing. Two witnesses: the
+  Sylvester one-liner, and the sharper fact that in a basis which does not
+  diagonalize the form the scalar surrogate is not merely uninformative but
+  false. For the moment form on `span{1, x}`, `det G(s) = Gamma(s)Gamma(s+1)` and
+  the kernel diagonal is `((x-s)^2 + s)/Gamma(s+1)`, whose logarithm at `x = 1`
+  is **not** concave on `[1/2, 1]`, where the multiplicity-one surrogate
+  `-log Gamma` is concave by Bohr--Mollerup. Checked numerically at three
+  interior points. This is the item's own counterexample; its stated value
+  `(3/2)Gamma(3/2)^{-1}` should read `(3/4)Gamma(3/2)^{-1}`, though the number
+  `3/(2 sqrt pi)` it reduces to is right.
+
+- **Proposition 8.7**, the collapse: `F_{lambda,D}(jD) = 0` iff
+  `ell(lambda) > j`, for every integer `j >= 0` and **every** `D > 0`, with no
+  rationality hypothesis. Hence at `s = jD` the null space contains the span of
+  the Jack polynomials of length exceeding `j`, with equality off the rank-null
+  locus, and the quotient has basis the Jack polynomials of `j` variables. The
+  kernel descends to the reproducing kernel of that `j`-variable model.
+
+  This is the algebraic form of the correspondence Figure 3 draws. At integer
+  rank the Riesz distribution at `s = jD` is supported on the closure of the
+  rank-`j` orbit (Faraut--Koranyi Prop. VII.2.3); here the same `j` counts the
+  rows the model keeps. Functions of `j` variables are what a measure carried by
+  rank-`j` elements can see.
+
+  Two limits are stated with it: the collapse is about this formal model and
+  constructs no Hilbert space, and (collapse) is indexed by integers, so it
+  speaks at the retained grid of Proposition 9.3 -- including the cap, where the
+  model collapses to `ceil(r)` rows -- and says nothing about band interiors.
+
+- **A fourth open problem** in Section 12, which is the item's `op:wallach-bergman`
+  restated at what actually remains open. Not whether the index identity holds --
+  Proposition 8.7 settles that for this model -- but whether any genuine Hilbert
+  space of functions reproduces `B_{N,r,s}` at nonintegral `r`. That is the
+  natural successor to Proposition 6.4: it obstructs the polynomial determinant
+  carrier and says nothing about a reproducing one, and the positivity of
+  Sections 8--10 is exactly the hypothesis such a carrier would need.
+
+### Verification
+
+`verify_figure3.py` grows from 28 to 32 checks and keeps the single entry point.
+(collapse) is checked at 6048 probes across nine values of `D` including
+irrational-ratio and unit cases, 0 mismatches; the quotient basis is checked
+against the length filter at twelve `(D, j)` pairs; and Remark 8.2's
+counterexample is checked in both directions, that the multiplicity-two curve
+falls below its chord and the multiplicity-one control rises above it, at the
+same three interior points.
+
+`verify_positivity.py`: 87 checks across four suites plus extras, all pass.
+
+### Not verified
+
+Nothing new is unverified beyond what Revision 8 already recorded: the figures
+still have not been visually inspected in-session.
+
+
+## Revision 10 (this build)
+
+Two false claims installed in Revision 8.5 removed, and the Section 9.5 archive
+pointers made to resolve. **61 pages, 0 errors, 0 overfull, 0 underfull, 0
+undefined or multiply-defined references**, no page-break issues. 87 checks pass.
+
+### Two errors of my own, found by testing rather than re-reading
+
+Both were in the paragraph joining Definition 8.6 to Proposition 8.7. Both were
+written as "immediate from (56) and cost no argument", which is the tell: the
+sentence claimed the reasoning was too obvious to check, and neither claim
+survived being checked.
+
+- **"`W_N(r,d)` is the closure of the positive-type locus of `B`."** False, and
+  not marginally. The strict locus where every `pi_lambda(s) > 0` is *empty* as
+  soon as the cutoff admits a rank-null partition, because such a pivot vanishes
+  identically in `s`. At integer rank that is the generic case: by Theorem 8.5
+  every `lambda` with `ell(lambda) > R` is rank-null, so at `(R, d) = (3, 8)` and
+  `N = 4` the strict locus is empty while `W_N = {0} u {4} u [8, inf)`. The claim
+  would assert that this set is the closure of the empty set. Even ignoring the
+  rank-null ideal it fails, because the isolated ladder and cap points have no
+  strictly positive neighbours and so are not in the closure of anything.
+
+  Replaced by the correct statement: `W_N` is where the form is positive
+  semidefinite, hence where the kernel descends to a kernel of positive type *on
+  the quotient by the null space*; the gap between the two sets is where
+  `det G_N` vanishes, and it contains the retained ladder points of
+  Proposition 9.3 and the isolated cap points of Remark 12.1. Describing the
+  quotient there is what Proposition 8.7 does, so the correction makes 8.7 the
+  resolution of the gap rather than a coda.
+
+- **"the erosion of Section 9 is precisely the failure of any proper subfamily to
+  decide the locus."** This contradicts Corollary 10.9, installed in Revision 8,
+  which supplies a finite -- hence proper -- family that does decide the locus.
+  At `(3/2, 8)` the family `{|lambda| <= 6}` decides `W_infinity` exactly.
+  Replaced by what erosion actually shows: a family truncated *below the
+  stabilization degree* gets the locus wrong, and no bound on the degree of a
+  deciding family follows from the finite-cutoff computation. That is the
+  effectivity gap Corollary 10.9 records, stated consistently with it.
+
+Proposition 8.7's null-space clause also now carries the cutoff `|lambda| <= N`,
+which the quotient clause already carried; the asymmetry was harmless but wrong.
+
+### The Section 9.5 pointers now resolve
+
+R-S5 required that anything relegated from Section 9.5 be reachable in the frozen
+archive. Three things were relegated in Revision 8 and the text pointed at them
+as "the ancillary data" and "the ancillary census" -- naming no file. Of the
+three, only the inertia was emitted anywhere (`verify_section8.py`); the exact
+value of the witness rank factor and the threshold census were emitted nowhere.
+A reader following those pointers would have found nothing.
+
+`ancillary_census.py` is new and emits all three:
+
+1. `F_{(3,3,3,3), 3/2}(9/4) = 310134825/16777216`, with the sign of the pivot at
+   three interior points of `5/2 < s < 3` confirming the text's conclusion.
+2. The full inertia at `(3/2, 8)`, cutoff 6: `(29, 1, 0)` at seven points across
+   the open cell `7 < s < 8`, constant, with `(2,2,2)` the unique null mode
+   at `s = 7`.
+3. The threshold census, six `(r, d)` pairs on both sides of `d = 4`.
+
+All three pointers in the text, and the supplementary-material paragraph, now
+name the file.
+
+A discrepancy surfaced while writing it. The census first reported inertia
+`(28, 1)` against the paper's `(29, 1)`. The paper was right: the Gram matrix on
+`V_N` is indexed by every `|lambda| <= N`, the empty partition included, and
+`pi_empty = 1 > 0` as an empty product. The first draft of the census had
+filtered the empty partition out. This is the fourth time a first-draft test has
+failed against a correct paper.
+
+The census also strengthens the text it supports. It shows `(3/2, 3)`, with
+`nu = 3/4 < 1`, eroding anyway -- because `D = 3/2` is not an integer and the
+trichotomy of Theorem 9.9 requires `D` in `Z`. So neither the multiplicity nor
+the defect alone governs, which is what Section 9.5 asserts; the sentence now
+points at a case that makes the second half of that assertion visible too.
+
+### Found and deliberately not fixed
+
+Remarks run on a counter separate from theorems, propositions, lemmas,
+definitions and corollaries. Every section with a remark therefore has a
+collision: Remark 4.1 against Theorem 4.1, Remark 7.1 and 7.2 against Lemmas 7.1
+and 7.2, Remark 8.1 against Definition 8.1, Remark 9.1 against Theorem 9.1,
+Remark 10.1 against Theorem 10.1, Remark 12.1 against Corollary 12.1 -- and now
+Remark 8.2 against Proposition 8.2.
+
+The new one is the worst of them, because Remark 8.2 and Proposition 8.2 are
+both about the Gram matrix and sit three pages apart, whereas the other pairs are
+unrelated objects. But the convention is the paper's, it predates every review
+round, and merging the counters would renumber essentially every result in the
+document and invalidate every external reference to it. Flagged rather than
+changed.
+
+Also flagged and not changed: Section 8.2 cites "(Theorem 9.9, Corollary 10.7)"
+for determining "the first cutoff at which the band loses a point and the exact
+degree at which it stops moving". Corollary 10.7 does both. Theorem 9.9 is a
+criterion for *whether* the upper edge erodes and determines no cutoff. This is
+in the z-measure attribution subsection, where what is and is not claimed matters,
+so it is quoted rather than silently repaired.
+
+
+## September 2026 build (release v1.1.0)
+
+Typeset with Etch & Sketch v2.5 (the kit's own version string:
+`\ProvidesPackage{etch-math}[2026/08/02 v2.5 ...]`; the "v5"/"v6" labels in the
+notes above are earlier round numbers, not kit versions), LuaHBTeX 1.24 under
+MiKTeX 25.12: **60 pages, 0 errors, 0 overfull boxes, no undefined or
+multiply-defined references**, and `tools/pagecheck.py` reports no page-break or
+math-font faults. The sequence of numbered environments and the count of equation
+environments are unchanged from revision 10, so every statement and equation
+number matches it.
+
+What changed against revision 10:
+
+- The preamble patch that appended `title after break={... (continued)}` to both
+  plate styles is removed; kit v2.5 sets the continuation title itself.
+- Title block: ORCID added, date September 2026.
+- Table 1 caption: the stability of the d = 4 row is now attributed to Corollaries
+  10.6 and 10.7 (stable from N* = 3) and the d = 2 row to Theorem 10.1, instead of
+  to the upper-edge trichotomy of Theorem 9.9.
+- After the defect definition, one sentence: at half-integer rank nu = d/4, which is
+  an integer exactly when 4 | d. Inline, so no equation numbers move.
+- The citation flagged in revision 10's "Found and deliberately not fixed" is fixed:
+  Section 8.2 now cites Corollary 10.7 alone (at integral defect) for the first
+  cutoff at which the band loses a point and the degree at which it stops moving.
+  The Remark-counter collision noted there is still not changed.
+- The supplementary-material paragraph now points to this release and to the
+  concept DOI, and names `ancillary_census.py` and `verify_positivity.py`.
+- Prose: five "not merely / not fundamentally" constructions made direct, and a
+  passage that appeared twice (that (r,d) = (3,6) is formal) now appears once.
+- A stranded heading (9.3) is kept with its text by `\Needspace*`, the device the
+  paper already uses before three other headings.
+
+Verification for this release: `python3 verify_positivity.py` ends with
+`ALL COMPUTATIONAL CLAIMS OF SECTIONS 8-11 VERIFIED` (87 checks in four suites plus
+the in-file extras, 0 failed, about 20 s on Python 3.14.6); `ancillary_census.py`,
+`verify_figure3.py` and `recompute_table.py` run clean.

@@ -9,8 +9,21 @@ Frozen archive accompanying the paper
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21713316.svg)](https://doi.org/10.5281/zenodo.21713316)
 
-**DOI:** [10.5281/zenodo.21713316](https://doi.org/10.5281/zenodo.21713316) (all versions) — [10.5281/zenodo.21713317](https://doi.org/10.5281/zenodo.21713317) for `v1.0.0` specifically
-**Commit:** [`05f8878`](https://github.com/johnzfitch/gindikin-rank/commit/05f88789e6db22d5ba6413880f3c3ef4256078e6), tagged [`v1.0.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.0.0)
+**DOI:** [10.5281/zenodo.21713316](https://doi.org/10.5281/zenodo.21713316) (all versions; resolves to the latest). Version DOIs are listed on the Zenodo record; [10.5281/zenodo.21713317](https://doi.org/10.5281/zenodo.21713317) is `v1.0.0`.
+**Release:** [`v1.1.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.1.0), the September 2026 revision of the paper. The July 2026 archive is [`v1.0.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.0.0) (commit [`05f8878`](https://github.com/johnzfitch/gindikin-rank/commit/05f88789e6db22d5ba6413880f3c3ef4256078e6)).
+
+## What changed in v1.1.0
+
+* **The paper** is the September 2026 revision: revision 10 of the source (August 2026) with a
+  typesetting and presentation pass. Theorem, proposition, lemma, corollary and equation numbers
+  are unchanged from revision 10. It is typeset with Etch & Sketch v2.5; see `BUILD.md`.
+* **New scripts.** `ancillary_census.py` emits the three quantitative receipts that Section 9.5
+  leaves to the supplement. `verify_figure3.py` checks every claim displayed in Figure 3 and the
+  collapse proposition (Proposition 8.7). `verify_positivity.py` is updated and now runs the
+  Figure 3 suite as well.
+* **Figures.** Figure 3 (cone strata) is new, so the positivity-loci and erosion-staircase figures
+  are now Figures 4 and 5 (`figs/fig4-positivity-loci.pdf`, `figs/fig5-erosion-staircase.pdf`).
+* **Housekeeping.** Compiled `__pycache__` files that v1.0.0 committed by mistake are removed.
 
 ---
 
@@ -39,8 +52,8 @@ ALL COMPUTATIONAL CLAIMS OF SECTIONS 8-11 VERIFIED
 * the erosion thresholds and stabilization degrees at integral defect;
 * the ingredients of Theorem 10.8 (rational steps stabilize), separately;
 * the conjugation duality of Theorem 11.1, cutoff by cutoff;
-* the Borodin–Olshanski dictionary of Proposition 8.2;
-* the finite-cutoff Gram determinant of Proposition 8.3;
+* the Borodin–Olshanski dictionary of Proposition 8.3;
+* the finite-cutoff Gram determinant of Proposition 8.2;
 * the separation corollary of Section 12.
 
 Each locus is obtained by algebraic cell decomposition of the real line and
@@ -63,8 +76,10 @@ narrower claim than correctness of the paper.
 | `verify_section8.py` | core suite: pivots, chambers, band/cap/grid, ideals, staircase, duality, Table 1 |
 | `verify_revision5.py` | negative-rank grid, defect factors, cap points, character indices |
 | `verify_revision6.py` | Theorem 10.8 ingredients, falling-factorial lemma, ν=1 case |
+| `verify_figure3.py` | every claim displayed in Figure 3, and Proposition 8.7 |
+| `ancillary_census.py` | standalone: the three quantitative receipts Section 9.5 leaves to the supplement |
 | `recompute_table.py` | standalone regeneration of Table 1 |
-| `figs/` | figure sources; `make_figures.py` regenerates all four |
+| `figs/` | figure sources; `make_figures.py` regenerates all five |
 | `bfun/` | Bernstein–Sato inputs for the sextonionic cubic |
 | `BUILD.md` | toolchain, revision history, and what each round changed |
 | `MANIFEST.md` | SHA-256 of every file |
@@ -83,9 +98,10 @@ cd figs && python3 make_figures.py
 
 ## Rebuilding the paper
 
-See `BUILD.md`. In short: LuaLaTeX against the vendored Etch & Sketch kit,
-three passes. On a stock TeX Live the one extra package needed is
-`texlive-luatex`, after which the font database must be built once.
+See `BUILD.md`. In short: two or three LuaLaTeX passes with the Etch & Sketch
+LaTeX kit (v2.5), which this archive does not include. On a stock TeX Live the
+one extra package needed is `texlive-luatex`, after which the font database
+must be built once.
 
 ## Citing
 

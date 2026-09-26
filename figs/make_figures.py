@@ -45,6 +45,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from es_figure import es_style, es_save          # noqa: E402
 import matplotlib.pyplot as plt                  # noqa: E402
 from matplotlib.lines import Line2D              # noqa: E402
+from matplotlib.patches import Rectangle, Polygon, FancyArrowPatch  # noqa: E402
+import numpy as np                               # noqa: E402
 
 es_style(backend="pgf")
 
@@ -103,7 +105,7 @@ def figure_one(path):
 
     n, cut = 6, 2.5
     xs = list(range(n))
-    ax.set_xlim(-0.72, n - 1 + 0.72)
+    ax.set_xlim(-0.72, n - 1 + 2.10)
     ax.set_ylim(-1.30, 1.34)
 
     # the two sub-intervals, shaded so the split reads before the braces do
@@ -139,6 +141,30 @@ def figure_one(path):
     brace(2.84, 5.16, 0.30, r"$\mathcal{G}_h(q,\,s-rh)$", AMBER)
     brace(-0.16, 5.16, -0.64,
           r"$\mathcal{G}_h(r+q,\,s)\times(2\pi)^{-hrq}$", INK, below=True)
+
+    # the normalization factor, as an area.  The exponent of 2*pi is h*r*q,
+    # so the rectangle of side r by q IS the exponent up to the constant h;
+    # this makes the one term that is pure bookkeeping into a measurement.
+    rx0, ry0, rw, rh_ = 5.72, -0.52, 0.66, 0.66
+    ax.add_patch(Rectangle((rx0, ry0), rw, rh_, facecolor=INK, alpha=0.10,
+                           edgecolor=INK, lw=0.6, zorder=3))
+    ax.annotate("", xy=(rx0 + rw, ry0 - 0.10), xytext=(rx0, ry0 - 0.10),
+                arrowprops=dict(arrowstyle="<|-|>", color=INK, lw=0.55,
+                                mutation_scale=5), zorder=4)
+    ax.text(rx0 + rw / 2, ry0 - 0.17, r"$r$", ha="center", va="top",
+            fontsize=TICK, color=INK)
+    ax.annotate("", xy=(rx0 + rw + 0.10, ry0 + rh_), xytext=(rx0 + rw + 0.10, ry0),
+                arrowprops=dict(arrowstyle="<|-|>", color=INK, lw=0.55,
+                                mutation_scale=5), zorder=4)
+    ax.text(rx0 + rw + 0.17, ry0 + rh_ / 2, r"$q$", ha="left", va="center",
+            fontsize=TICK, color=INK)
+    ax.text(rx0 + rw / 2, ry0 + rh_ + 0.10, r"area $=rq$", ha="center",
+            va="bottom", fontsize=TICK, color=INK, style="italic")
+
+    # the axis carries an arrowhead, as in the other three figures
+    ax.annotate("", xy=(n - 0.5 + 0.22, 0), xytext=(n - 0.5, 0),
+                arrowprops=dict(arrowstyle="-|>", color=INK, lw=0.9,
+                                mutation_scale=8), zorder=3)
 
     for side in ("top", "right", "left", "bottom"):
         ax.spines[side].set_visible(False)
@@ -283,11 +309,26 @@ def figure_three(path):
         if bal is not None:
             ax.plot([bal, bal], [y - 0.235, y - 0.075], color=FOREST,
                     lw=1.1, zorder=5)
+        if not integer:
+            # where the integer-rank ray would have run: from the top of this
+            # row's locus to the right edge, drawn hollow.
+            edge = cap if cap is not None else max(b for _, b in ivals)
+            for dy in (-0.085, 0.085):
+                ax.plot([edge + 0.12, hi + 0.30], [y + dy, y + dy],
+                        color=WINE, lw=0.6, alpha=0.5, ls=(0, (2.6, 2.2)),
+                        zorder=2)
+            ax.plot([edge + 0.12, edge + 0.12], [y - 0.085, y + 0.085],
+                    color=WINE, lw=0.6, alpha=0.5, zorder=2)
 
-    # hairline separating the integer controls from the fractional rows
+    # hairline separating the integer controls from the fractional rows,
+    # with each block named so the contrast is on the figure, not in the caption
     sep = len(rows) - 2.5
     ax.plot([lo + 0.10, hi + 0.30], [sep, sep], color=GREY, lw=0.5,
             alpha=0.9, zorder=2)
+    ax.text(hi + 0.30, sep + 0.14, r"integer rank: ladder $\cup$ ray",
+            ha="right", va="bottom", fontsize=TICK, color=GREY, style="italic")
+    ax.text(hi + 0.30, sep - 0.16, r"fractional rank: ladder $\cup$ band",
+            ha="right", va="top", fontsize=TICK, color=GREY, style="italic")
 
     ax.set_yticks([len(rows) - 1 - i for i in range(len(rows))])
     ax.set_yticklabels([r"%s,\ %s" % (r[0], r[1]) for r in rows])
@@ -307,9 +348,11 @@ def figure_three(path):
                label=r"isolated cap $D\lceil r\rceil$"),
         Line2D([], [], marker="|", ls="none", ms=7.5, mec=FOREST, mew=1.1,
                label=r"balanced point $rD$"),
+        Line2D([], [], color=WINE, lw=0.6, alpha=0.5, ls=(0, (2.6, 2.2)),
+               label=r"ray lost"),
     ]
     ax.legend(handles=handles, loc="upper center",
-              bbox_to_anchor=(0.5, -0.155), ncol=4,
+              bbox_to_anchor=(0.5, -0.155), ncol=5,
               fontsize=TICK, labelcolor=INK)
 
     es_save(fig, path, bbox_inches=None)
@@ -405,10 +448,269 @@ def figure_four(path):
     plt.close(fig)
 
 
+# ======================================================================
+# Figure 3 - the cone/stratum dictionary, and its collapse
+# ======================================================================
+# Figure 5 - the geometric dictionary, and what survives without it.
+#
+# LEFT.  At integer rank R the Wallach set is not merely a subset of the line: each
+# of its points names a stratum of the cone.  By Faraut--Koranyi Prop. VII.2.3 the
+# Riesz distribution R_s at s = jD is a positive measure supported on the closure
+# of the rank-j orbit, and by Thm. VII.3.1 those, together with the open ray, are
+# the only s at which R_s is positive at all.  So the map s |-> supp R_s carries
+# the ladder onto the flag of boundary strata
+#     {0}  <  rank-1 orbit closure  <  boundary  <  closure of the cone,
+# and carries the unbounded ray onto the interior.  Drawn for R = 3.
+#
+# RIGHT.  At fractional rank there is no cone, hence no interior stratum for a ray
+# to be supported on.  What the paper proves survives is the left-hand end of the
+# picture: the retained grid jD for 0 <= j <= ceil(r) (Prop. 9.3), the band of
+# Thm. 9.1, and the cap D*ceil(r) (eq. maxlocus).  The ray is drawn as an absence.
+#
+# Geometry note: the cone is a perspective drawing, apex down, in the register of
+# the classical figure -- rim ellipse with the far half dashed, two generators to
+# the apex.  Nothing is to scale; only the containment order is meaningful.
+
+# ---- cone geometry (shared by both panels) --------------------------------
+APEX = (0.0, 0.0)
+RIM_Y = 1.62          # height of the rim centre
+RIM_A = 1.02          # rim semi-axis, horizontal
+RIM_B = 0.30          # rim semi-axis, vertical (the perspective squash)
+
+
+def _rim(t):
+    """Rim ellipse, parameter t in radians. t=0 is the right edge."""
+    return RIM_A * np.cos(t), RIM_Y + RIM_B * np.sin(t)
+
+
+def _draw_cone(ax, ghost=False):
+    """Apex-down perspective cone.  ghost=True draws it as an absence."""
+    ec = GREY if ghost else INK
+    lw = 0.7 if ghost else 0.9
+    ls_front = (0, (2.2, 2.2)) if ghost else "-"
+
+    t = np.linspace(0, 2 * np.pi, 400)
+    rx, ry = _rim(t)
+
+    # lateral surface, as a filled polygon between the two generators
+    tf = np.linspace(np.pi, 2 * np.pi, 200)          # front (lower) rim half
+    fx, fy = _rim(tf)
+    body = Polygon(np.column_stack([np.r_[fx, APEX[0]], np.r_[fy, APEX[1]]]),
+                   closed=True, facecolor="none", edgecolor="none", zorder=1)
+    ax.add_patch(body)
+
+    # the far half of the rim is hidden by the cone wall
+    tb = np.linspace(0, np.pi, 200)
+    bx, by = _rim(tb)
+    ax.plot(bx, by, color=ec, lw=lw * 0.8, ls=(0, (1.6, 2.0)), zorder=4)
+    ax.plot(fx, fy, color=ec, lw=lw, ls=ls_front, zorder=4)
+
+    # generators
+    for xe in (-RIM_A, RIM_A):
+        ax.plot([APEX[0], xe], [APEX[1], RIM_Y], color=ec, lw=lw,
+                ls=ls_front, zorder=4)
+    return body
+
+
+def _shade_interior(ax, colour, alpha):
+    """The open cone: everything strictly inside the lateral surface."""
+    tf = np.linspace(np.pi, 2 * np.pi, 200)
+    fx, fy = _rim(tf)
+    tb = np.linspace(np.pi, 0, 200)
+    bx, by = _rim(tb)
+    poly = Polygon(np.column_stack([np.r_[bx, fx, APEX[0]],
+                                    np.r_[by, fy, APEX[1]]]),
+                   closed=True, facecolor=colour, alpha=alpha,
+                   edgecolor="none", zorder=2)
+    ax.add_patch(poly)
+    return poly
+
+
+def _extreme_ray(ax, colour, lw=1.9, alpha=1.0):
+    """One extreme ray: apex to a rim point on the visible front edge."""
+    xe, ye = _rim(-np.pi / 2 - 0.55)
+    ax.plot([APEX[0], xe], [APEX[1], ye], color=colour, lw=lw,
+            alpha=alpha, zorder=5, solid_capstyle="round")
+    return xe, ye
+
+
+def _boundary_band(ax, colour, alpha):
+    """The lateral boundary surface, shaded."""
+    tf = np.linspace(np.pi, 2 * np.pi, 200)
+    fx, fy = _rim(tf)
+    poly = Polygon(np.column_stack([np.r_[fx, APEX[0]], np.r_[fy, APEX[1]]]),
+                   closed=True, facecolor=colour, alpha=alpha,
+                   edgecolor="none", zorder=3)
+    ax.add_patch(poly)
+
+
+def _axis_row(ax, y, x0, x1, arrow=True):
+    ax.plot([x0, x1], [y, y], color=INK, lw=0.9, zorder=3)
+    if arrow:
+        ax.annotate("", xy=(x1 + 0.16, y), xytext=(x1, y),
+                    arrowprops=dict(arrowstyle="-|>", color=INK,
+                                    lw=0.9, mutation_scale=8), zorder=3)
+
+
+def _link(ax, xy_from, xy_to, colour, rad=0.0, ls="-", lw=0.7, alpha=0.85):
+    ax.add_patch(FancyArrowPatch(
+        xy_from, xy_to, arrowstyle="-|>", mutation_scale=7,
+        color=colour, lw=lw, ls=ls, alpha=alpha,
+        connectionstyle="arc3,rad=%.2f" % rad, zorder=6,
+        shrinkA=2.0, shrinkB=2.0))
+
+
+def figure_five(path):
+    fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH, 3.42),
+                             layout="constrained")
+    axL, axR = axes
+
+    SAX = -0.92          # y of the spectral axis in cone coordinates
+    XL, XR = -1.42, 1.90 # cone-panel x extent
+
+    # =================================================================
+    # LEFT PANEL -- integer rank R = 3
+    # =================================================================
+    ax = axL
+    ax.set_xlim(XL, XR)
+    ax.set_ylim(-1.72, 2.32)
+    ax.set_aspect("equal")
+    ax.set_xticks([])
+    ax.set_yticks([])
+    for side in ("top", "right", "left", "bottom"):
+        ax.spines[side].set_visible(False)
+
+    _shade_interior(ax, BLUE, 0.17)
+    _boundary_band(ax, INK, 0.15)
+    _draw_cone(ax)
+    xr1, yr1 = _extreme_ray(ax, INK)
+    ax.plot([APEX[0]], [APEX[1]], "o", color=INK, ms=4.6, zorder=7)
+
+    ax.text(0.0, RIM_Y + 0.52, r"$\overline{\Omega}$, rank $R=3$",
+            ha="center", va="bottom", fontsize=LABEL, color=INK)
+
+    # the four strata, named on the drawing
+    ax.text(-1.36, -0.04, r"$\{0\}$", ha="left", va="center",
+            fontsize=TICK, color=INK)
+    ax.text(-1.36, 0.62, r"rank $1$", ha="left", va="center",
+            fontsize=TICK, color=INK)
+    ax.text(1.16, 0.74, r"$\partial\Omega$", ha="left", va="center",
+            fontsize=TICK, color=INK)
+    ax.text(1.16, 1.44, r"$\Omega$", ha="left", va="center",
+            fontsize=TICK, color=BLUE)
+    ax.plot([1.06, 1.13], [1.44, 1.44], color=BLUE, lw=0.5)
+    ax.plot([0.62, 1.13], [0.80, 0.74], color=INK, lw=0.5)
+    ax.plot([-1.20, -0.02], [-0.04, -0.02], color=INK, lw=0.5)
+    ax.plot([-1.20, xr1 * 0.55], [0.62, yr1 * 0.55], color=INK, lw=0.5)
+
+    # spectral axis
+    _axis_row(ax, SAX, -1.30, 1.62)
+    pts = [(-1.02, r"$0$", INK), (-0.34, r"$D$", INK),
+           (0.34, r"$2D$", INK)]
+    for x, lab, c in pts:
+        ax.plot([x], [SAX], "o", color=c, ms=5.0, mfc=c, mec=PANEL,
+                mew=1.1, zorder=5)
+        ax.text(x, SAX - 0.17, lab, ha="center", va="top",
+                fontsize=TICK, color=INK)
+    ax.plot([0.34, 1.50], [SAX, SAX], color=BLUE, lw=2.6,
+            solid_capstyle="butt", zorder=4)
+    ax.text(0.92, SAX - 0.17, r"$s>2D$", ha="center", va="top",
+            fontsize=TICK, color=INK)
+    ax.text(-1.30, SAX + 0.30,
+            r"$\mathcal{W}_\infty(3,d)$: ladder $\cup$ ray",
+            ha="left", va="bottom", fontsize=TICK, color=INK)
+
+    # the correspondence
+    _link(ax, (-1.02, SAX + 0.10), (APEX[0] - 0.06, APEX[1] - 0.05),
+          INK, rad=0.18)
+    _link(ax, (-0.34, SAX + 0.10), (xr1 * 0.62, yr1 * 0.62), INK, rad=0.14)
+    _link(ax, (0.34, SAX + 0.10), (0.56, 0.72), INK, rad=-0.14)
+    _link(ax, (0.92, SAX + 0.13), (0.42, 1.22), BLUE, rad=-0.20)
+
+    ax.text(1.66, SAX + 0.02, r"$s\mapsto\operatorname{supp}R_s$",
+            ha="right", va="bottom", fontsize=TICK, color=INK,
+            style="italic")
+
+    # =================================================================
+    # RIGHT PANEL -- fractional rank r = 3/2
+    # =================================================================
+    ax = axR
+    ax.set_xlim(XL, XR)
+    ax.set_ylim(-1.72, 2.32)
+    ax.set_aspect("equal")
+    ax.set_xticks([])
+    ax.set_yticks([])
+    for side in ("top", "right", "left", "bottom"):
+        ax.spines[side].set_visible(False)
+
+    _draw_cone(ax, ghost=True)
+    ax.text(0.0, RIM_Y + 0.52, r"no cone at $r=\tfrac32$",
+            ha="center", va="bottom", fontsize=LABEL, color=GREY)
+    ax.text(0.0, 0.80, r"no rank-$R$", ha="center", va="center",
+            fontsize=TICK, color=GREY)
+    ax.text(0.0, 0.62, r"interior stratum", ha="center", va="center",
+            fontsize=TICK, color=GREY)
+
+    _axis_row(ax, SAX, -1.30, 1.62)
+
+    # the band that replaces the ray, and the retained grid
+    ax.plot([-0.34, 0.34], [SAX, SAX], color=BLUE, lw=2.6,
+            solid_capstyle="butt", zorder=4)
+    for x, lab in ((-1.02, r"$0$"), (-0.34, r"$D$")):
+        ax.plot([x], [SAX], "o", color=BLUE, ms=5.0, mfc=BLUE, mec=PANEL,
+                mew=1.1, zorder=5)
+        ax.text(x, SAX - 0.17, lab, ha="center", va="top",
+                fontsize=TICK, color=INK)
+    ax.plot([0.34], [SAX], "o", color=AMBER, ms=5.4, mfc=AMBER, mec=PANEL,
+            mew=1.1, zorder=6)
+    ax.text(0.34, SAX - 0.17, r"$2D$", ha="center", va="top",
+            fontsize=TICK, color=INK)
+    ax.plot([0.0, 0.0], [SAX - 0.10, SAX + 0.10], color=FOREST,
+            lw=1.4, zorder=6)
+    ax.text(0.0, SAX + 0.15, r"$rD$", ha="center", va="bottom",
+            fontsize=TICK, color=FOREST)
+
+    # the ray, as an absence: the channel it used to occupy, drawn hollow
+    for dy in (-0.075, 0.075):
+        ax.plot([0.40, 1.50], [SAX + dy, SAX + dy], color=WINE, lw=0.7,
+                alpha=0.55, ls=(0, (2.6, 2.2)), zorder=5)
+    ax.plot([0.40, 0.40], [SAX - 0.075, SAX + 0.075], color=WINE, lw=0.7,
+            alpha=0.55, zorder=5)
+    ax.plot([0.34, 0.34], [SAX - 0.30, SAX + 0.30], color=WINE,
+            lw=1.3, zorder=8)
+    ax.text(0.98, SAX - 0.20, r"ray removed", ha="center", va="top",
+            fontsize=TICK, color=WINE, style="italic")
+    ax.text(-1.30, SAX + 0.30,
+            r"$\mathcal{W}_{\mathrm{pre}}(\tfrac32,d)=\{0\}\cup[D,2D]$",
+            ha="left", va="bottom", fontsize=TICK, color=INK)
+
+    # the arrow with no target
+    _link(ax, (0.92, SAX + 0.13), (0.42, 1.10), GREY, rad=-0.20,
+          ls=(0, (2.0, 2.0)), alpha=0.6)
+    ax.text(0.66, 1.28, r"$\times$", ha="center", va="center",
+            fontsize=11.5, color=WINE)
+
+    handles = [
+        Line2D([], [], color=BLUE, lw=2.6, label=r"positive locus"),
+        Line2D([], [], color=AMBER, lw=0, marker="o", ms=4.8,
+               label=r"cap $D\lceil r\rceil$"),
+        Line2D([], [], color=FOREST, lw=1.4, label=r"balanced point $rD$"),
+        Line2D([], [], color=WINE, lw=0.7, alpha=0.55, ls=(0, (2.6, 2.2)),
+               label=r"ray lost at fractional rank"),
+    ]
+    fig.legend(handles=handles, loc="outside lower center", ncol=4,
+               fontsize=TICK, labelcolor=INK, frameon=False,
+               handlelength=1.5, handletextpad=0.5, columnspacing=1.6)
+
+    es_save(fig, path, bbox_inches=None)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
     figure_one(os.path.join(here, "fig1-cocycle-split.pdf"))
     figure_two(os.path.join(here, "fig2-divisor-cancellation.pdf"))
-    figure_three(os.path.join(here, "fig3-positivity-loci.pdf"))
-    figure_four(os.path.join(here, "fig4-erosion-staircase.pdf"))
-    print("wrote fig1, fig2, fig3, fig4")
+    figure_five(os.path.join(here, "fig3-cone-strata.pdf"))
+    figure_three(os.path.join(here, "fig4-positivity-loci.pdf"))
+    figure_four(os.path.join(here, "fig5-erosion-staircase.pdf"))
+    print("wrote fig1..fig5")

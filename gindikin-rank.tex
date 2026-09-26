@@ -13,16 +13,6 @@
 % what distinguishes a caption from body text here, and gives back the size.
 \captionsetup{font={normalsize,it}}
 
-% A theorem box that splits across a page loses its name on the continuation.
-% tcolorbox's `title after break' redraws the title bar; \tcbtitletext is the
-% box's own title, so the continuation names the same result.
-\makeatletter
-\tcbset{
-  esmath-thmbox/.append style={title after break={\kvtcb@title\ (continued)}},
-  esmath-thmbox-mid/.append style={title after break={\kvtcb@title\ (continued)}},
-}
-\makeatother
-
 % ---- paper-specific notation ----
 \newcommand{\Gom}{\Gamma_{\Omega}}          % Gindikin cone gamma
 \newcommand{\Gc}{\mathcal{G}}               % continued symbol: \Gc_h(r,s)
@@ -52,8 +42,9 @@
 Determinant Carrier, Positivity Without a Cone}\\[10pt]
 {\normalsize John Zachary Fitch}\\[2pt]
 {\footnotesize Independent Researcher}\\[1pt]
-{\footnotesize\ttfamily zack@internetuniverse.org}\\[3pt]
-{\footnotesize\itshape \today}
+{\footnotesize\ttfamily zack@internetuniverse.org}\\[1pt]
+{\footnotesize ORCID \href{https://orcid.org/0009-0007-7953-1531}{0009-0007-7953-1531}}\\[3pt]
+{\footnotesize\itshape September 2026}
 \end{center}
 
 \esrule
@@ -84,9 +75,9 @@ stabilization; and partition conjugation gives the duality
 \end{equation*}
 \medskip
 \noindent
-{\footnotesize\textbf{Keywords.} Barnes double gamma function; Gindikin gamma;
-symmetric cone; rank continuation; zeta regularization; Bernstein--Sato
-polynomial; Wallach set; Jack polynomial; Jack $z$-measure.}
+{\footnotesize\textbf{Keywords.} Barnes double gamma; Gindikin gamma; rank
+continuation; Bernstein--Sato polynomial; Wallach set; Jack polynomial; Jack
+$z$-measure.}
 
 \smallskip
 \noindent
@@ -124,9 +115,8 @@ denotes an integer cone rank and $N$ the degree cutoff.
 This paper continues the second. Fix $h>0$ and let $r$ be a complex variable in
 place of the factor count. We construct a function $\Gc_h(r,s)$, meromorphic on
 $\Cc^2$, agreeing with \eqref{eq:gindikin} at every $r=N\in\Zint_{\ge0}$, and
-determine which parts of its structure survive. Throughout, $N$ denotes an integer
-rank and $r$ a complex one; no Jordan algebra is claimed to exist at nonintegral
-$r$.
+determine which parts of its structure survive. No Jordan algebra is claimed to
+exist at nonintegral $r$.
 
 The problem is not continuation in $s$, which is classical --- each fixed-length
 product is already meromorphic in $s$ --- nor continuation of a
@@ -153,82 +143,70 @@ the factor count.
 
 \subsection{Termination and Positivity Test Different Realizability Questions}
 
-\paragraph{Integer ranks are recovered exactly.}
-Theorem~\ref{thm:intspec} shows
-$\Gc_h(N,s)=(2\pi)^{h\binom{N}{2}}\prod_{j=0}^{N-1}\Gamma(s-jh)$ at every
-$N\in\Zint_{\ge0}$, so \eqref{eq:gindikin} is recovered exactly. The identity is
-not a fit through sampled points but a consequence of a telescoping identity for
-the double zeta together with Lerch's theorem.
-
-\paragraph{Interval splitting produces exact functional equations.}
-Section~\ref{sec:cocycle} derives five. Splitting the regularized interval at an
-interior rank produces a rank-addition cocycle,
+The construction and its exact identities come first. \Cref{thm:intspec} shows
+\begin{equation*}
+  \Gc_h(N,s)\;=\;(2\pi)^{h\binom{N}{2}}\prod_{j=0}^{N-1}\Gamma(s-jh)
+  \qquad\text{at every } N\in\Zint_{\ge0},
+\end{equation*}
+so \eqref{eq:gindikin} is recovered exactly --- not
+by a fit through sampled points, but as a consequence of a telescoping identity
+for the double zeta together with Lerch's theorem. Cutting and rescaling the
+regularized interval then produce the identities the rest of the paper rests on
+(Section~\ref{sec:cocycle}): splitting at an interior rank gives the rank-addition
+cocycle
 \begin{equation}
   \Gc_h(r+q,\,s)\;=\;(2\pi)^{h r q}\,\Gc_h(r,s)\,\Gc_h(q,\,s-rh),
   \label{eq:cocycle-intro}
 \end{equation}
-and the same normalization gives a reflection law
-$\Gc_h(-r,s)\,\Gc_h(r,\,s+rh)=(2\pi)^{h r^2}$ across $r=0$. Both hold as
-identities in the continuous variables, as do the two unit shifts of
-Theorem~\ref{thm:shift} and the reciprocal-step identity of
-Theorem~\ref{thm:duality}, which relates $\Gc_h$ to $\Gc_{1/h}$. These are the
-identities on which Sections~\ref{sec:term}--\ref{sec:dual} rest.
+the same normalization gives a reflection law
+$\Gc_h(-r,s)\,\Gc_h(r,\,s+rh)=(2\pi)^{h r^2}$ across $r=0$, and rescaling the
+Barnes lattice gives the reciprocal-step identity of \Cref{thm:duality} relating
+$\Gc_h$ to $\Gc_{1/h}$. These, with the two unit shifts of \Cref{thm:shift}, hold
+as identities in the continuous variables. The multiplier ambiguity they leave is
+then classified rather than assumed away: \Cref{thm:ambiguity} determines every
+entire deformation preserving the cocycle and both unit shifts as a rank
+character $e^{2\pi ikr}$ times a coboundary of a doubly periodic profile,
+\Cref{prop:charcouple} shows that reciprocal covariance couples the two character
+indices, and \Cref{bcor:ratio} closes uniqueness against a sectorial large-$s$
+normalization. We therefore claim canonicity relative to stated axioms, not a
+unique continuation.
 
-\paragraph{Termination detects integral rank.}
-The unit-step quotient of $\Gc_h$ in $s$ is the single gamma ratio
-$\Rm_{r,h}(s)=h^r\,\Gamma(s/h+1)/\Gamma(s/h+1-r)$. Theorem~\ref{thm:term} shows
-it is rational in $s$ if and only if $r\in\Zint$, polynomial if and only if
-$r\in\Zint_{\ge0}$, and reciprocal-polynomial at negative integers, while
-nonintegral $r$ leaves two infinite arithmetic progressions of poles and zeros
-that never meet. Termination in $s$ is a faithful detector of
-integrality of the rank.
+Termination is what distinguishes integral rank, and it is what a determinant
+carrier would have to reproduce. The unit-step quotient of $\Gc_h$ in $s$ is the
+single gamma ratio $\Rm_{r,h}(s)=h^r\,\Gamma(s/h+1)/\Gamma(s/h+1-r)$;
+\Cref{thm:term} shows it is rational in $s$ exactly for $r\in\Zint$ and polynomial
+exactly for $r\in\Zint_{\ge0}$, while nonintegral $r$ leaves two infinite
+arithmetic progressions of poles and zeros that never meet. For a Jordan
+determinant of rank $N$ and multiplicity $d$ the Bernstein--Sato polynomial is
+$b(s)=\prod_{j=0}^{N-1}(s+1+j\tfrac{d}{2})$ \cite{FK,Kimura}, and
+\Cref{prop:bernstein} converts termination into nonexistence: a Bernstein--Sato
+polynomial compatible with the shift law, in the precise affine sense of
+\eqref{eq:affinecompat}, forces the rank to be a nonnegative integer, negative
+integers excluded along with the nonintegral ranks. The symbol exists analytically
+at every complex rank; what fails off the nonnegative integer lattice, under the
+affine compatibility condition \eqref{eq:affinecompat}, is a polynomial
+determinant carrier reproducing the spectral shift quotient. The one place a
+degenerate carrier might have supplied the missing step is settled by computation:
+\Cref{prop:sextonion} obtains the multiplicity-four $b$-function for the cubic
+norm of $J_3(\mathbb{S})$, so that carrier does not realize the formal step $d=6$
+either.
 
-\paragraph{Polynomial determinant carriers disappear off the lattice.}
-For a Jordan determinant of rank $N$ and multiplicity $d$ the Bernstein--Sato
-polynomial is $b(s)=\prod_{j=0}^{N-1}(s+1+j\tfrac{d}{2})$, of degree $N$
-\cite{FK,Kimura}. \Cref{prop:bernstein} converts termination into nonexistence:
-a Bernstein--Sato polynomial compatible with the shift law, in the precise affine
-sense of \eqref{eq:affinecompat}, forces the rank to be a nonnegative integer.
-Negative integral ranks are excluded along with the nonintegral ones. The symbol
-exists analytically at every complex rank; what fails off the nonnegative integer
-lattice, under the affine compatibility condition \eqref{eq:affinecompat}, is a
-polynomial determinant carrier reproducing the spectral shift quotient.
-Proposition~\ref{prop:sextonion} computes the $b$-function of the degenerate
-cubic norm of $J_3(\mathbb{S})$, the $3\times3$ Hermitian cubic space over the
-sextonions, and obtains the multiplicity-four value, so that carrier does not
-realize the formal step $d=6$.
+The continuation is analytic rather than geometric. Away from nonnegative integer
+rank, its recurrence no longer terminates to the polynomial data carried by a
+Jordan determinant. But the loss of a determinant does not force positivity to
+disappear. The same affine factors can still be assembled into a formal
+Jack--Riesz pairing, and this pairing remains positive semidefinite for a genuine
+range of spectral parameters even though no symmetric cone lies behind it.
 
-\paragraph{The remaining ambiguity is classified.}
-\Cref{lem:coclass} classifies entire additive cocycles: every one is a coboundary
-$\varphi(s)-\varphi(s-rh)$. \Cref{lem:mult2add} reduces an arbitrary entire
-multiplicative deformation to that additive setting, and \Cref{thm:ambiguity}
-then determines every one of them: a rank character $e^{2\pi ikr}$ times a
-coboundary of a profile periodic under both shifts. For
-$h=p/q$ the profile ranges over the entire functions of period $1/q$; for
-irrational $h$ it is constant, so only the characters remain, and a fixed
-logarithmic lift is rigid. \Cref{prop:charcouple} shows that reciprocal covariance couples the two
-character indices, and \Cref{prop:cbtype} computes the least nonzero type,
-$2\pi p$, carried by the fundamental periodic harmonics.
-\Cref{prop:growth} places $\Gc_h$ itself outside the order-one growth
-class to which Carlson-type theorems apply, and \Cref{bcor:ratio} closes
-uniqueness relative to an asymptotic normalization in $s$. We therefore claim
-canonicity relative to the stated axioms, not a unique continuation.
-
-\paragraph{Positivity survives at fractional rank.}
-Sections~\ref{sec:wallach}--\ref{sec:dual} study the associated formal
-Jack--Riesz pairing, every sign in which is controlled by a single lattice
-polynomial evaluated at two points. At positive nonintegral rank the unbounded
-Wallach ray disappears. The all-degree locus is bounded; at rational steps it
-contains a closed cell chamber around the balanced point, while the initial
-finite-cutoff band may subsequently erode or fragment.
-
-\paragraph{The two halves test different questions.}
-The
-Bernstein--Sato quotient shows that a compatible finite-dimensional polynomial
-determinant model can occur only at nonnegative integral rank. The formal
-Jack--Riesz pairing shows that positivity is weaker: at fractional rank it
-persists on explicit intervals and isolated points. Integrality is therefore
-detected by polynomial termination, not by positivity alone.
+At integer rank, the positive set is the familiar Wallach set: a discrete ladder
+followed by an unbounded ray. At fractional rank, that ray is cut off and replaced
+by a bounded arrangement of intervals and isolated points. The contents of Young
+diagrams record where signs change, which modes become null, and how the
+arrangement evolves as partitions of higher degree are admitted. We give a
+complete description when the naturally scaled distance to the next integer is
+integral, prove that the arrangement eventually stops changing whenever the step
+$d/2$ is rational, and show that partition conjugation carries the entire picture
+across the duality $d\leftrightarrow 4/d$.
 
 \subsection{Relation to Barnes Products, Bernstein--Sato Theory,
   and Jack \texorpdfstring{$z$}{z}-Measures}
@@ -254,12 +232,10 @@ The argument proceeds in three stages. Sections~\ref{sec:norm}--\ref{sec:uniquen
 construct the symbol, recover the integer product, derive its functional
 equations, detect integrality through termination, exclude fractional polynomial
 determinant carriers, and fix the continuation by spectral normalization.
-Sections~\ref{sec:wallach}--\ref{sec:arith} turn positivity into a cell-lattice
-problem, describe the loss and erosion of the Wallach ray, and isolate the
-arithmetic regimes in which the surviving locus stabilizes.
-Section~\ref{sec:dual} transports these loci across reciprocal steps, and
-Section~\ref{sec:scope} explains why positivity persists after polynomial
-carriers disappear.
+Sections~\ref{sec:wallach}--\ref{sec:arith} turn positivity into a question about
+the contents of Young diagrams. Section~\ref{sec:dual} transports the resulting
+loci across reciprocal steps, and Section~\ref{sec:scope} states the separation
+the two halves establish.
 
 \begin{center}
   \essubtitle{Part I. Analytic Continuation and Carrier Obstructions}
@@ -1274,8 +1250,8 @@ identity fails already at $h=\tfrac12$, where $d=1$ and $2\pi p=2\pi\neq\pi$.
 Among simple Euclidean Jordan algebras of rank at least $3$, the Peirce
 multiplicities are $d\in\{1,2,4\}$, together with the exceptional value $d=8$
 only at rank $3$. Rank-$2$ spin factors realize every integer multiplicity
-$d\ge1$. Thus the pair $(r,d)=(3,6)$ used here is formal, although $d=6$ does
-occur for genuine rank-$2$ spin factors.
+$d\ge1$ \cite[Ch.~V]{FK}. Thus the pair $(r,d)=(3,6)$ used here is formal,
+although $d=6$ does occur for genuine rank-$2$ spin factors.
 
 \begin{remark}[The rate near the real axis]
 \label{rem:cusp}
@@ -1309,6 +1285,37 @@ imaginary axis, bounded on a half-plane, and vanishing on $\Zint_{\ge0}$,
 vanishes identically.
 Applying it here requires knowing the growth class of the objects involved, and
 that is now available in closed form.
+
+One ingredient of the expansion is not proved here. The half-sector computation
+below identifies every coefficient from the present normalization, but widening
+the sector to the full slit plane is exactly the content of Ruijsenaars's
+analysis of the multiple zeta \cite{Ruij}, and the following lemma states what is
+imported in the form the proof consumes. The translation between his conventions
+and ours is tabulated in \Cref{app:ruij}.
+
+\begin{lemma}[Sectorial continuation of the Barnes remainder]
+\label{lem:sector}
+Fix $h>0$, $M\ge1$ and $\delta>0$, and let
+$\rho_M(z,a)=\Gamma(z)\Zt(z,a\mid1,h)-\sum_{n\le M}c_n(h)\Gamma(z+n)a^{-z-n}$ be
+the truncated remainder of \eqref{eq:zetaexp}. Then $\rho_M$, and its derivative
+in $z$ at $z=0$, continue holomorphically in $a$ from the right half-sector to
+$\Cc\setminus(-\infty,0]$, and
+\begin{equation*}
+  \partial_z\rho_M(0,a)\;=\;O\bigl(\lvert a\rvert^{-M-1}\bigr)
+  \qquad\text{uniformly on } \lvert\arg a\rvert\le\pi-\delta .
+\end{equation*}
+\end{lemma}
+
+\begin{proof}[Proof of \Cref{lem:sector}]
+Specialize \cite[Prop.~2.3 and (3.13)--(3.15)]{Ruij} to $N=2$, $a_1=1$, $a_2=h$
+under the identifications of \Cref{app:ruij}. Proposition~2.3 there continues the
+remainder \cite[(3.14)]{Ruij} holomorphically to $\Cc\setminus(-\infty,0]$, and
+\cite[(3.15)]{Ruij} bounds it by
+$O(\lvert a\rvert^{\,N-M'-1})=O(\lvert a\rvert^{-M-1})$ uniformly on
+$\lvert\arg a\rvert\le\pi-\delta$, since $M'=M+2$ by \Cref{app:ruij}. The cited
+expansion is already the differentiated one, so no further passage through
+$\partial_z$ is required.
+\end{proof}
 
 \begin{proposition}{The symbol has quadratic-logarithmic rank growth}{growth}
 Write $B_n$ for the Bernoulli numbers with the convention $B_1=-\tfrac12$, and
@@ -1421,25 +1428,8 @@ These are the first three terms of \eqref{eq:stirling}. With
 \eqref{eq:stirling} on every closed right half-sector
 $\lvert\arg a\rvert\le\tfrac{\pi}{2}-\varepsilon$.
 
-The extension of \eqref{eq:zetaexp}, together with its differentiated remainder
-\eqref{eq:cauchyrem}, from the right half-sector to every closed slit sector
-$\lvert\arg a\rvert\le\pi-\delta$ is supplied by
-\cite[Prop.~2.3 and (3.13)--(3.15)]{Ruij}. The notation matches as follows.
-Ruijsenaars writes $\zeta_N(s,w\mid a_1,\dots,a_N)$ for the multiple zeta
-function and builds it from
-$f(t)=t^{N}\prod_{j=1}^{N}(1-e^{-a_jt})^{-1}$ \cite[(3.1)]{Ruij}. The present
-case is $N=2$ with $a_1=1$, $a_2=h$, so that $f(t)=t^{2}K(t)$; his $s$ is our
-$z$ and his $w$ is our $a$, so his $\zeta_2$ is our $\Zt(\,\cdot\,,\,\cdot\mid1,h)$
-and his $\Psi_N(w)=\partial_s\zeta_N(s,w)|_{s=0}$ \cite[(3.12)]{Ruij} is our
-$\Fh(a)$. The cited expansion is therefore already the differentiated one, and
-no further passage through $\partial_z$ is required. His truncation index is
-ours shifted by $N$: he subtracts the Taylor coefficients of $f$ through order
-$M'$, which are the $c_n(h)$ of \eqref{eq:zetaexp} for $n\le M'-2$, so
-$M'=M+2$. With these identifications \cite[Prop.~2.3]{Ruij} continues the
-remainder \cite[(3.14)]{Ruij} holomorphically to $\Cc\setminus(-\infty,0]$, and
-\cite[(3.15)]{Ruij} bounds it by
-$O\bigl(\lvert a\rvert^{\,N-M'-1}\bigr)=O\bigl(\lvert a\rvert^{-M-1}\bigr)$
-uniformly on $\lvert\arg a\rvert\le\pi-\delta$. So specialized,
+The extension from the right half-sector to every closed slit sector
+$\lvert\arg a\rvert\le\pi-\delta$ is \Cref{lem:sector}. So extended,
 \cite[(3.13)]{Ruij} is \eqref{eq:stirling} term for term: its logarithmic
 coefficient is $-\tfrac12B_{2,2}(a)$, which is $-Q_h(a)$ for the polynomial
 $Q_h$ of \Cref{thm:duality}, and its remaining terms are the three exceptional
@@ -1605,7 +1595,9 @@ but the unbounded ray disappears: the all-degree locus is bounded, and at
 rational steps it contains a closed cell chamber around the balanced point, while
 the initial finite-cutoff band may subsequently erode or fragment. The erosion
 proceeds by a mechanism that can be identified cell by cell --- and that, for some
-multiplicities, provably comes to a stop.
+multiplicities, provably comes to a stop. \Cref{fig:strata} shows what is at
+stake: at integer rank each point of the Wallach set names a stratum of the cone,
+and it is the stratum carrying the ray that fractional rank removes.
 
 The two halves of the paper study the same affine root products through two
 different questions. The first half asks when the continued spectral recurrence
@@ -1861,7 +1853,7 @@ boundary --- retained ladder points, a bounded band, isolated points above it --
 rather than an open chamber. The results below compute those loci exactly
 (\Cref{thm:band}, \Cref{thm:d2}, \Cref{thm:stab}), classify the stable locus at integral defect,
 and determine the first cutoff at which the band loses a point and the exact
-degree at which it stops moving (\Cref{thm:erosion}, \Cref{thm:ncut}). Finite-degree
+degree at which it stops moving (\Cref{thm:ncut}, at integral defect). Finite-degree
 erosion in particular has no counterpart in an all-degree classification: it is
 invisible until a diagram of the critical size is admitted, and its cutoff
 $N_*=\nu(\lceil r\rceil+1)$ is a statement about the truncated form, not about
@@ -1869,8 +1861,8 @@ the family.
 
 \begin{remark}[The two-point cell kernel]
 \label{rem:twopoint}
-The positivity theory below is not fundamentally about rank. Every statement is
-about two evaluations of one cell polynomial, and it is worth naming the object
+Rank plays no special role in the positivity theory below. Every statement is
+about two evaluations of one cell polynomial, and it is worth naming that object
 once. Put
 \begin{equation}
   \Pi_{\lambda,D}(x,y)\;=\;
@@ -1907,7 +1899,7 @@ root to both factors, so the two factors can disagree in sign only if a root
 separates $rD$ from $s$. Naming the set of those roots turns the observation
 into a theorem.
 
-\begin{theorem}{Cell-lattice chamber positivity}{chamber}
+\begin{theorem}{Content-set chamber positivity}{chamber}
 Let $D>0$ and $r\in\Rr$, and define the \emph{content set}
 \begin{equation}
   \Lambda_D\;=\;\bigl\{\,(i-1)D-(j-1)\;:\;i,j\in\Zint_{\ge1}\,\bigr\}.
@@ -2034,6 +2026,129 @@ $\{0\}\cup[4,\infty)$; and the Albert case $(3,8)$ gives
 $\{0\}\cup\{4\}\cup[8,\infty)$, ladder points and continuous ray in the right
 places \cite[Ch.~XIII]{FK}.
 
+\subsection{Discrete Wallach Points Collapse the Reproducing Kernel}
+\label{ssec:bergman}
+
+Classically the Wallach set is not defined as a positivity locus of numbers. It
+is the set of parameters at which a \emph{kernel} is of positive type: for the
+tube domain over $\Omega$, the values of $\nu$ for which $\mathcal{K}_\nu$
+reproduces some Hilbert space of holomorphic functions, the Bergman kernel being
+the member at the distinguished parameter \cite[Ch.~XIII, \S2]{FK}. The pairing of
+\Cref{def:jack} carries the same kernel, and recording it costs nothing because
+\Cref{prop:gram} has already made $G_N(r,s)$ diagonal.
+
+\begin{definition}[The reproducing kernel of the model]
+\label{def:bergman}
+For $|\lambda|\le N$ with $\pi_\lambda(s)\ne0$ throughout, let
+$v_N=(P^{(\alpha)}_\lambda)_{|\lambda|\le N}$ and set
+\begin{equation}
+  B_{N,r,s}(x,y)\;=\;v_N(x)^{\!\top}G_N(r,s)^{-1}v_N(y)
+  \;=\;\sum_{|\lambda|\le N}
+  \frac{P^{(\alpha)}_\lambda(x)\,P^{(\alpha)}_\lambda(y)}{\pi_\lambda(s)} ,
+  \label{eq:bergman}
+\end{equation}
+the second equality because $G_N$ is diagonal.
+\end{definition}
+
+The relation between \eqref{eq:bergman} and \eqref{eq:loci} needs stating with
+care, because the two are not the same set and the gap between them is where this
+paper's content lies. The kernel is defined, and is of positive type, exactly
+where every $\pi_\lambda(s)>0$. That strict locus is smaller than
+$\mathcal{W}_N(r,d)$, and often very much smaller: as soon as the cutoff admits a
+rank-null partition, some $\pi_\lambda$ vanishes identically in $s$ and the strict
+locus is \emph{empty}, while $\mathcal{W}_N$ is not. At integer rank this is the
+generic situation --- by \Cref{thm:intrank} every $\lambda$ with $\ell(\lambda)>R$
+is rank-null, so for $N>R$ the strict locus is empty and $\mathcal{W}_N$ is still
+the full ladder and ray. So $\mathcal{W}_N$ is not the closure of the strict
+locus, and no statement below should treat it as one.
+
+What is true is that $\mathcal{W}_N(r,d)$ is exactly where the form
+\eqref{eq:pairing} is positive semidefinite, hence exactly where
+\eqref{eq:bergman} descends to a kernel of positive type on the quotient by the
+null space. The difference between the two sets is where $\det G_N$ vanishes,
+computed in \eqref{eq:gram}, and it is not a negligible boundary: the retained
+ladder points of \Cref{prop:grid} and the isolated cap points of
+\Cref{rem:isolated} lie in it. Describing the quotient there is the substance of
+\Cref{prop:collapse} below. The whole matrix is the invariant, not any one of its
+entries: \eqref{eq:loci} constrains every $\pi_\lambda$ simultaneously, and the
+erosion of \Cref{sec:erosion} is the statement that a family truncated below the
+stabilization degree gets the locus wrong. This is not in tension with
+\Cref{cor:certificate}, which supplies a finite family that does decide it; what
+erosion shows is that no bound on the degree of that family is available from the
+finite-cutoff computation alone.
+
+\begin{remark}[A single entry constrains nothing]
+\label{rem:sylvester}
+Positivity of a Gram matrix implies positivity of each diagonal entry and is not
+implied by it: $\bigl(\begin{smallmatrix}1&2\\2&1\end{smallmatrix}\bigr)$ has
+positive diagonal and eigenvalue $-1$. In a basis that does not diagonalize the
+form, the scalar surrogate is not merely uninformative but false. For the moment
+form $\langle x^a,x^b\rangle_s=\Gamma(s+a+b)$ on $\operatorname{span}\{1,x\}$,
+\begin{equation*}
+  \det G(s)=\Gamma(s)\Gamma(s+1),\qquad
+  v(x)^{\!\top}G(s)^{-1}v(x)=\frac{(x-s)^2+s}{\Gamma(s+1)} ,
+\end{equation*}
+and at $x=1$ the logarithm of the right-hand side is \emph{not} concave on
+$[\tfrac12,1]$, where the multiplicity-one surrogate $-\log\Gamma$ is concave by
+Bohr--Mollerup. That the Jack basis diagonalizes \eqref{eq:pairing} is what
+spares the present argument this distinction; it does not make the distinction
+vacuous.
+\end{remark}
+
+The substantive statement is what happens at a discrete Wallach point. There the
+kernel collapses onto a model in finitely many variables, and the number of
+variables is the index of the point.
+
+\begin{proposition}{Discrete Wallach points collapse the model in rows}{collapse}
+Let $D>0$ and $j\in\Zint_{\ge0}$. Then for every partition $\lambda$,
+\begin{equation}
+  F_{\lambda,D}(jD)=0
+  \quad\Longleftrightarrow\quad
+  \ell(\lambda)>j ,
+  \label{eq:collapse}
+\end{equation}
+independently of $D$. Consequently, at $s=jD$ the null space of
+\eqref{eq:pairing} contains
+$\operatorname{span}\{P^{(\alpha)}_\lambda:\ell(\lambda)>j,\ |\lambda|\le N\}$,
+with equality when $rD\notin\Lambda_D$, and the quotient of the model by that
+null space has basis $\{P^{(\alpha)}_\lambda:\ell(\lambda)\le j,\ |\lambda|\le N\}$
+--- the Jack polynomials in $j$ variables. The kernel \eqref{eq:bergman} descends
+to the reproducing kernel of that $j$-variable model.
+\end{proposition}
+
+\begin{proof}[Proof of \Cref{prop:collapse}]
+A cell $(i,k)\in\lambda$ contributes the spectral factor $jD-\xi_{ik}$ with
+$\xi_{ik}=(i-1)D-(k-1)$, so it vanishes precisely when $(i-1-j)D=k-1$. If $k=1$
+this forces $i=j+1$; if $k>1$ it forces $i>j+1$. Either way $i\ge j+1$, so a
+vanishing cell exists only if $\ell(\lambda)\ge j+1$. Conversely if
+$\ell(\lambda)\ge j+1$ then $(j+1,1)\in\lambda$ and its factor is $jD-jD=0$. This
+is \eqref{eq:collapse}, and no rationality hypothesis on $D$ was used. By
+\eqref{eq:pivot} the pivot $\pi_\lambda(jD)$ vanishes exactly when
+$F_{\lambda,D}(jD)=0$ or $\Pi_\lambda(r)=0$, and the second alternative is empty
+unless $rD\in\Lambda_D$ by \Cref{prop:idealfull}. The kernel of \eqref{eq:pairing}
+is the span of the null $P^{(\alpha)}_\lambda$ by \Cref{def:jack}, and the
+surviving Jack polynomials are those of length at most $j$, which are the Jack
+polynomials of $j$ variables. Since $G_N$ is diagonal, \eqref{eq:bergman}
+restricted to the quotient is the corresponding sum over $\ell(\lambda)\le j$.
+\end{proof}
+
+\Cref{prop:collapse} is the algebraic form of the correspondence drawn in
+\Cref{fig:strata}. At integer rank $R$ the classical statement is that the Riesz
+distribution at $s=jD$ is a positive measure supported on the closure of the
+rank-$j$ orbit \cite[Prop.~VII.2.3]{FK}; here the same index $j$ appears as the
+number of rows the model retains. The functions that survive at the $j$-th
+ladder point are those of $j$ variables, which is what a measure carried by
+rank-$j$ elements can see. The case $j=1$ is the collapse to a one-variable
+model, and it is the first ladder point above the vertex.
+
+Two limits on the reading. The collapse is a statement about this formal model
+and its diagonal form; it does not construct a Hilbert space of functions on
+anything, and at nonintegral rank there is no cone whose orbits could index the
+quotients. And \eqref{eq:collapse} is indexed by integers $j$, so it speaks at
+the retained grid points of \Cref{prop:grid} --- including the cap
+$D\lceil r\rceil$, where the model collapses to $\lceil r\rceil$ rows --- and
+says nothing about the interior of a band.
+
 
 \section{Fractional Rank Caps the Wallach Ray, then Null Ideals Govern
   Its Erosion}
@@ -2052,7 +2167,9 @@ rank sits below the next integer. Define the \emph{defect}
   \label{eq:defect}
 \end{equation}
 which vanishes exactly at integer rank and equals $D$ times the fractional
-deficiency $\lceil r\rceil-r$. In a cell of row $i=\lceil r\rceil+1+t$ and column
+deficiency $\lceil r\rceil-r$. At half-integer rank, where
+$\lceil r\rceil-r=\tfrac12$, the defect is $\nu=\tfrac D2=\tfrac d4$, which is an
+integer exactly when $4\mid d$. In a cell of row $i=\lceil r\rceil+1+t$ and column
 $j$ the rank factor of \eqref{eq:master-factors} takes the value
 \begin{equation}
   r-(i-1)+\alpha(j-1)\;=\;\frac{(j-1)-\nu-tD}{D},
@@ -2064,8 +2181,8 @@ a fixed rank strip $k-1<r<k$, the continuous dependence on $r$ enters through th
 defect $\nu=D(k-r)$; the integer $k=\lceil r\rceil$ separately fixes the critical
 row, the ladder length, the cap, the witness degrees and the stabilization
 threshold.
-The first structural fact is that continuing the rank does not merely deform the
-Wallach set --- it changes its topology.
+The first structural fact is that continuing the rank changes the topology of the
+Wallach set.
 
 \begin{theorem}{Positive fractional rank replaces the terminal ray by a bounded initial locus}{band}
 Let $r>0$ be real with $r\notin\Zint$, write $k=\lceil r\rceil$, and set
@@ -2211,6 +2328,31 @@ for every $d>0$. At integral defect the same value is visible in the closed form
 \eqref{eq:stab}, whose largest element is $rD+\nu=D\lceil r\rceil$: the isolated
 point $\ell=\nu$ when $\nu\ge2$, the band top $rD+1$ when $\nu=1$.
 
+At integer rank each point of the positivity locus names a stratum of the cone,
+and \Cref{fig:strata} draws that correspondence beside what replaces it.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{figs/fig3-cone-strata.pdf}
+\caption{The geometric dictionary, and what survives without it. \emph{Left:} at
+integer rank $R=3$ the Riesz distribution $R_s$ is a positive measure exactly on
+the Wallach set, and at the ladder point $s=jD$ its support is the closure of the
+rank-$j$ orbit \cite[Prop.~VII.2.3, Thm.~VII.3.1]{FK}. The map
+$s\mapsto\operatorname{supp}R_s$ therefore carries the ladder onto the flag
+$\{0\}\subset\overline{\mathcal{O}_1}\subset\partial\Omega$ and carries the
+unbounded ray onto the interior $\Omega$; the arrows are that map, and the cone is
+a perspective drawing in which only the containment order is meaningful.
+\emph{Right:} at $r=\tfrac32$ there is no cone, hence no interior stratum for a
+ray to be supported on. What \Cref{thm:band} and \Cref{prop:grid} leave is the
+left-hand end of the picture --- the retained grid $\{0,D,2D\}$ and the bounded
+band $\mathcal{W}_{\mathrm{pre}}=\{0\}\cup[D,2D]$ containing the balanced point
+$rD$, capped at $D\lceil r\rceil$ by \eqref{eq:maxlocus}. The channel to the right
+of the cap is where the ray was. The band shown is the pre-erosion locus of
+\Cref{thm:band}; at $d=6$ and $d=8$ it subsequently erodes, as
+Table~\ref{tab:erosion} records.}
+\label{fig:strata}
+\end{figure}
+
 \subsection{Spectral and Rank Roots Account for Every Null Mode}
 The boundary structure is equally explicit. By \eqref{eq:master-factors} the factor
 $s-(i-1)\tfrac{d}{2}+(j-1)$ vanishes when $s=(i-1)\tfrac{d}{2}-k$ with
@@ -2287,7 +2429,8 @@ At integer rank $\nu=0$ and the cell is $(\lceil r\rceil+1,1)$, recovering the
 familiar length ideal $\lambda_{\lceil r\rceil+1}\ge1$, equivalently
 $\ell(\lambda)>\lceil r\rceil$, used in \Cref{thm:intrank}.
 
-\subsection{The Cell Lattice Generates a Principal Rank-Null Ideal}
+\Needspace*{14\baselineskip}
+\subsection{The Content Set Generates a Principal Rank-Null Ideal}
 The first sub-diagonal is not the whole story, and the content set settles the
 rest of it exactly. By \eqref{eq:pivot} a cell $(i,j)$ is rank-null precisely
 when $rD=(i-1)D-(j-1)$, so the question is whether the rescaled rank meets
@@ -2561,8 +2704,8 @@ Condition \eqref{eq:nolattice} holds at $t=0$, but at $t=1$ the interval
 $\bigl(\tfrac32,\tfrac94\bigr)$ contains the integer $2$, and the cell with
 $t=1$, $j=3$ has $u=\tfrac12\in(0,\nu)$. The rectangle
 $\lambda=(3,3,3,3)$ realizes exactly one such cell. Its rank factor
-$F_{\lambda,3/2}(\tfrac94)$ is a positive rational (the exact value is in the
-ancillary data), while its spectral factor $F_{\lambda,3/2}(s)$ is negative for
+$F_{\lambda,3/2}(\tfrac94)$ is a positive rational (the exact value is emitted by
+\texttt{ancillary\_census.py}), while its spectral factor $F_{\lambda,3/2}(s)$ is negative for
 $\tfrac52<s<3$, so $\pi_\lambda(s)<0$ there. The upper edge therefore erodes at
 degree $12$: the locus is $\{0,\tfrac32\}\cup[2,3]$ at $N=6$ and
 $\{0,\tfrac32\}\cup[2,\tfrac52]\cup\{3\}$ at $N=12$. Every fractional row of
@@ -2573,11 +2716,11 @@ here is invisible at even $d$.
 
 The threshold is not monotone in $d$: at $\nu=1$ the cell
 that would produce a negative pivot is the same cell that annihilates the
-partition, so $\nu=1$ is protected for a different reason than $\nu<1$. And the
-governing quantity is the defect together with the arithmetic of $D$, not the
-multiplicity by itself: at $(\tfrac65,3)$, where $\nu=\tfrac65>1$, the upper edge
-erodes although $d<4$, while at $(\tfrac34,8)$, where $\nu=1$, it does not
-although $d>4$.
+partition, so $\nu=1$ is protected for a different reason than $\nu<1$. The
+governing quantity is therefore the defect together with the arithmetic of $D$,
+not the multiplicity by itself; \texttt{ancillary\_census.py} records pairs on
+either side of the threshold at each of $d<4$ and $d>4$, including a case with
+$\nu<1$ that erodes because $D\notin\Zint$.
 
 \Cref{thm:erosion} concerns the upper edge alone. It does not assert that the
 band is stable, and in general the band can also erode from below. The exact
@@ -2602,9 +2745,10 @@ $\operatorname{sign}\Pi_\lambda(\tfrac32)=+1$ and
   \label{eq:pivot222}
 \end{equation}
 a sextic that is negative on $(-1,0)\cup(3,4)\cup(7,8)$ and, within the band
-$[4,8]$, negative exactly on the open cell $(7,8)$. At cutoff $N=6$ the Gram
-form has inertia $29$ positive and $1$ negative throughout $7<s<8$. At $s=7$ and
-cutoff $N=6$ the unique null mode is $P_{(2,2,2)}$; the band's upper boundary
+$[4,8]$, negative exactly on the open cell $(7,8)$. At cutoff $N=6$ the Gram form
+acquires exactly one negative direction throughout $7<s<8$, and at $s=7$ its
+unique null mode is $P_{(2,2,2)}$ --- \texttt{ancillary\_census.py} records the
+full inertia of that cutoff. The band's upper boundary
 drops from $8$ to $7$, and $s=8$ survives in isolation. Every deeper erosion candidate at $(\tfrac32,8)$
 --- the Pochhammer zeros at $s=6$ and $s=5$ inside the band --- requires
 $\lambda_3\ge3$ and therefore lies in the rank-null ideal. This is the cellwise
@@ -2613,7 +2757,7 @@ the cutoff, that ends the erosion.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{figs/fig3-positivity-loci.pdf}
+\includegraphics{figs/fig4-positivity-loci.pdf}
 \caption{Positivity at integer and fractional rank; each row is labelled with the
 locus it shows, and the one finite-cutoff row carries a dashed rule. The grey
 integer controls ($r=2,3$), governed by \Cref{thm:intrank}, carry the classical
@@ -2635,12 +2779,14 @@ decomposition in exact rational arithmetic at the stated cutoff.
 
 \begin{table}[htbp]
 \centering
-\caption{Exact positivity loci at selected fractional ranks. For these
-even multiplicities, hence $D\in\Zint$, the integer-step trichotomy of
-\Cref{thm:erosion} applies and erosion is governed by the defect $\nu=D(\lceil r\rceil-r)$, not by $d$: the rows with
-$\nu\le1$ never move, the two rows with $\nu=2$ erode once and are then stopped
-by the rank-null ideal, and $(\tfrac32,6)$, whose $\nu=\tfrac32$ admits no ideal,
-erodes twice --- at $N=6$ and again at $N=9$.}
+\caption{Exact positivity loci at selected fractional ranks. Every row has even
+$d$, so $D\in\Zint$, and erosion is governed by the defect
+$\nu=D(\lceil r\rceil-r)$ rather than by $d$. The row $(\tfrac32,2)$, with
+$\nu=\tfrac12$, never moves, by \Cref{thm:d2}. The row $(\tfrac32,4)$, with
+$\nu=1$, is stable from $N_*=3$ on, by \Cref{thm:stab} and \Cref{thm:ncut}. The
+two rows with $\nu=2$ erode once, at $N=2(\lceil r\rceil+1)$, and are then
+stopped by the rank-null ideal. The row $(\tfrac32,6)$, whose $\nu=\tfrac32$
+admits no ideal, erodes twice, at $N=6$ and again at $N=9$.}
 \label{tab:erosion}
 \smallskip
 \small
@@ -2916,7 +3062,7 @@ $k+1\le N$. This gives \eqref{eq:staircase}.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{figs/fig4-erosion-staircase.pdf}
+\includegraphics{figs/fig5-erosion-staircase.pdf}
 \caption{The integral-defect erosion staircase, drawn in the terminal coordinate
 $\sigma=kD-s$ alone; the spectral parameter is recovered by $s=kD-\sigma$, which
 reverses orientation. Each row is a constraint level $M=1,\dots,\nu$, first
@@ -3081,6 +3227,50 @@ fractional parts of $tD$ are dense modulo $1$, the content set $\Lambda_D$ is
 dense, and no finite stratification of a bounded interval refines every pivot's
 sign pattern. Whether finite stabilization nevertheless holds at irrational step
 is open.
+
+Two consequences are worth recording, because together they say exactly how much
+of the rational case is effective.
+
+\begin{corollary}[Finite certificate]
+\label{cor:certificate}
+Let $D=\tfrac d2$ be rational and $r\in\Rr$. Then there is a finite family of
+partitions $\mathcal F(r,d)$ with
+\begin{equation}
+  \mathcal{W}_\infty(r,d)
+  \;=\;\bigcap_{\lambda\in\mathcal F(r,d)}\bigl\{\,s\in\Rr:\pi_\lambda(s)\ge0\,\bigr\}.
+  \label{eq:certificate}
+\end{equation}
+\end{corollary}
+
+\begin{proof}[Proof of \Cref{cor:certificate}]
+By \Cref{thm:ratstab} there is a finite $N_0$ with
+$\mathcal W_{N_0}(r,d)=\mathcal W_\infty(r,d)$; take
+$\mathcal F(r,d)=\{\lambda:|\lambda|\le N_0\}$ and apply \eqref{eq:loci}.
+\end{proof}
+
+\begin{corollary}[The stabilization degree is self-dual]
+\label{cor:n0dual}
+Write $N_0(r,d)$ for the least cutoff at which \eqref{eq:ratstab} holds. Then
+\begin{equation}
+  N_0\bigl(-rD,\;\tfrac4d\bigr)\;=\;N_0(r,d)
+  \label{eq:n0dual}
+\end{equation}
+whenever either side is defined.
+\end{corollary}
+
+\begin{proof}[Proof of \Cref{cor:n0dual}]
+\Cref{thm:transpose} matches $\mathcal W_N(r,d)$ with
+$\mathcal W_N(-rD,4/d)$ cutoff by cutoff, since partition conjugation preserves
+degree. A cutoff is therefore stabilizing on one side exactly when it is
+stabilizing on the other, and the least such cutoffs agree.
+\end{proof}
+
+\Cref{cor:certificate} is where the effectivity gap sits: it asserts that a
+finite certificate exists without bounding its degree, and determining a
+minimal-degree certificate is the open problem recorded in
+Section~\ref{sec:scope}. \Cref{cor:n0dual} says that the gap is one problem and
+not two, since the reciprocal-step image of an unsettled case is unsettled by
+exactly the same amount.
 
 \Cref{thm:ratstab} settles the three examples that the finite-cutoff computations
 above leave without a closed form. At $(\tfrac32,6)$, $(\tfrac32,10)$ and
@@ -3272,75 +3462,11 @@ for $r<0$ may be inferred from it, and none is asserted here.
 \label{sec:scope}
 
 The two halves of the paper answer different realizability questions, and the
-fractional-rank positivity computed above is where they part company. This
-section states what that positivity does and does not assert, and closes with
-the directions left open.
+fractional-rank positivity computed above is where they part company. The
+separation can be stated as a single result, each clause of which is a
+specialization of a theorem already proved.
 
-\begin{remark}[Positivity does not force integrality]
-\label{rem:pd-psd}
-Fractional rank does not force loss of positivity. At rational steps whose
-rescaled rank lies inside a cell chamber, \Cref{thm:chamber} gives a nontrivial
-positive interval; the integral-defect cases of \Cref{thm:stab} supply further
-semidefinite intervals on the lattice. A single example such as
-$(r,d)=(\tfrac32,2)$ already proves the intended claim that positivity does not
-force integrality. The definiteness must nevertheless be stated carefully. At
-$(\tfrac32,2)$ the open band is positive \emph{definite}, by \Cref{thm:d2}. At
-$(\tfrac32,4)$ definiteness depends on the cutoff: $\alpha=\tfrac12$ puts the cell
-$(3,2)$ in the rank-null ideal, so every $\lambda$ with $\lambda_3\ge2$ is
-identically null, minimally $(2,2,2)$. That partition first fits at $N=6$, so for
-$N<6$ the open band is positive definite, while for $N\ge6$ it is semidefinite but
-not definite and becomes definite only after quotienting the ideal. Either way the
-fractional-rank positivity is compatible with quotient or non-polynomial
-realizations, but does not construct one. It therefore does not conflict with
-\Cref{prop:bernstein}, which obstructs compatible \emph{polynomial}
-Bernstein--Sato realizations rather than positive forms.
-\end{remark}
-
-\begin{remark}[Cap points are not classical ladder points]
-\label{rem:isolated}
-In the computed finite-degree loci the points $8$ at $(\tfrac32,8)$, $6$ at
-$(\tfrac32,6)$ and $12$ at $(\tfrac52,8)$ arise as exact Pochhammer zeros: points
-where the critical rectangle pivot vanishes rather than changes sign. Each of the
-three is the cap $D\lceil r\rceil$, so all three are retained at every degree by
-\Cref{prop:grid}, and by \eqref{eq:maxlocus} each is the maximum of its
-all-degree locus. At integral defect \Cref{thm:stab} additionally identifies them
-inside the complete closed form. They are therefore fractional analogues of the
-discrete Wallach points, produced by a different mechanism from the classical
-discrete points below the band, which arise from the ladder. At $(\tfrac32,6)$,
-whose defect is not integral, the point $6$ is still all-degree and isolated ---
-the degree-six census already excludes $(5,6)$ --- although the complete locus
-below it remains unclassified.
-\end{remark}
-
-\begin{remark}[Scope]
-\label{rem:wallach-scope}
-Every finite-cutoff locus above is indexed by its cutoff. The unindexed
-$\mathcal W_\infty$ is the separately defined all-degree locus, obtained by
-requiring nonnegativity at every cutoff. Finite-cutoff nullities must not be read
-as
-unindexed infinite-dimensional nullities. Positivity of this formal pairing is
-not the existence of a Euclidean Jordan algebra, a symmetric cone, or a
-determinant carrier. Among simple Euclidean Jordan algebras of rank at least $3$, the Peirce
-multiplicities are $d\in\{1,2,4\}$, together with the exceptional value $d=8$
-only at rank $3$, and rank-$2$ spin factors realize every integer multiplicity
-$d\ge1$ \cite[Ch.~V]{FK}. Thus the pair $(r,d)=(3,6)$ used here is formal, though
-$d=6$ does occur for genuine rank-$2$ spin factors. The fractional case displayed
-at $d=6$ is also the most fragile: it has no protecting ideal, and its band
-erodes from both ends.
-\end{remark}
-
-\begin{remark}
-\label{rem:d6-contrast}
-The formal step $d=6$ at \emph{integer} rank $3$ is a useful contrast: by
-\Cref{thm:intrank} its positive locus is $\{0\}\cup\{3\}\cup[6,\infty)$ at every
-cutoff $N\ge3$ ---
-exactly the shape of a rank-$3$ Wallach set with $\tfrac{d}{2}=3$, although no
-Euclidean Jordan algebra has $(r,d)=(3,6)$. Integrality of the \emph{rank}, not
-realizability of the pair $(r,d)$, is what the positivity computation tracks.
-\end{remark}
-
-The separation the title announces can be stated as a single result, and it is
-worth doing so: each clause is a specialization of a theorem already proved.
+\subsection{The Separation}
 
 \begin{corollary}[Analytic existence, polynomial realizability and positivity separate]
 \label{cor:separation}
@@ -3376,30 +3502,147 @@ analytic existence, polynomial realizability, and positivity. The
 Barnes--Gindikin symbol exists at every complex factor count. Its spectral
 recurrence terminates polynomially only at nonnegative integral rank. The formal
 Jack--Riesz pairing, however, can remain positive semidefinite at nonintegral
-rank. The remaining question is therefore not whether fractional rank is
-analytically meaningful, but whether its positive forms admit a natural
-nonpolynomial carrier.
+rank.
 
-Three directions remain open. The first is the effective content of
+\subsection{Interpretation and Limitations}
+
+Fractional rank does not force loss of positivity. At rational steps whose
+rescaled rank lies inside a cell chamber, \Cref{thm:chamber} gives a nontrivial
+positive interval; the integral-defect cases of \Cref{thm:stab} supply further
+semidefinite intervals on the lattice. A single example such as
+$(r,d)=(\tfrac32,2)$ already proves the intended claim that positivity does not
+force integrality. The definiteness must nevertheless be stated carefully. At
+$(\tfrac32,2)$ the open band is positive \emph{definite}, by \Cref{thm:d2}. At
+$(\tfrac32,4)$ definiteness depends on the cutoff: $\alpha=\tfrac12$ puts the cell
+$(3,2)$ in the rank-null ideal, so every $\lambda$ with $\lambda_3\ge2$ is
+identically null, minimally $(2,2,2)$. That partition first fits at $N=6$, so for
+$N<6$ the open band is positive definite, while for $N\ge6$ it is semidefinite but
+not definite and becomes definite only after quotienting the ideal. Either way the
+fractional-rank positivity is compatible with quotient or non-polynomial
+realizations, but does not construct one. It therefore does not conflict with
+\Cref{prop:bernstein}, which obstructs compatible \emph{polynomial}
+Bernstein--Sato realizations rather than positive forms.
+
+Two limits on what the positivity statements assert should be recorded. Every
+finite-cutoff locus above is indexed by its cutoff; the unindexed
+$\mathcal W_\infty$ is the separately defined all-degree locus, obtained by
+requiring nonnegativity at every cutoff, and finite-cutoff nullities must not be
+read as unindexed infinite-dimensional nullities. And positivity of this formal
+pairing is not the existence of a Euclidean Jordan algebra, a symmetric cone, or a
+determinant carrier; the pair $(r,d)=(3,6)$ used here is formal, as recorded
+after \Cref{prop:cbtype}. The fractional case displayed at $d=6$ is also the most
+fragile: it has no protecting ideal, and
+its band erodes from both ends. The same step at \emph{integer} rank $3$ is a
+useful contrast: by \Cref{thm:intrank} its positive locus is
+$\{0\}\cup\{3\}\cup[6,\infty)$ at every cutoff $N\ge3$ --- exactly the shape of a
+rank-$3$ Wallach set with $\tfrac d2=3$, although no Euclidean Jordan algebra has
+$(r,d)=(3,6)$. Integrality of the \emph{rank}, not realizability of the pair
+$(r,d)$, is what the positivity computation tracks.
+
+\begin{remark}[Cap points are not classical ladder points]
+\label{rem:isolated}
+In the computed finite-degree loci the points $8$ at $(\tfrac32,8)$, $6$ at
+$(\tfrac32,6)$ and $12$ at $(\tfrac52,8)$ arise as exact Pochhammer zeros: points
+where the critical rectangle pivot vanishes rather than changes sign. Each of the
+three is the cap $D\lceil r\rceil$, so all three are retained at every degree by
+\Cref{prop:grid}, and by \eqref{eq:maxlocus} each is the maximum of its
+all-degree locus. At integral defect \Cref{thm:stab} additionally identifies them
+inside the complete closed form. They are therefore formal fractional analogues of
+the discrete Wallach points, produced by a different mechanism from the classical
+discrete points below the band, which arise from the ladder. At $(\tfrac32,6)$,
+whose defect is not integral, the point $6$ is still all-degree and isolated ---
+the degree-six census already excludes $(5,6)$ --- although the complete locus
+below it remains unclassified.
+\end{remark}
+
+\subsection{Open Problems}
+
+The remaining question is not whether fractional rank is analytically meaningful,
+but whether its positive forms admit a natural nonpolynomial carrier. Three
+directions remain open. The first is the effective content of
 \Cref{thm:ratstab}: the stabilization degree and the closed form at rational
 nonintegral defect, where stabilization is now known to occur but no threshold is
-available. The second is whether finite stabilization holds at all at irrational
-step, where the content set is dense and the stratification argument of
+available; equivalently, a minimal-degree certificate for the finite family of
+\Cref{cor:certificate}. The second is whether finite stabilization holds at all at
+irrational step, where the content set is dense and the stratification argument of
 \Cref{thm:ratstab} has nothing to work with. The third is a complete description
 of the negative-rank loci, beyond the positive-rank families that
-\Cref{thm:transpose} transports.
+\Cref{thm:transpose} transports. By \Cref{cor:n0dual} the first and third are not
+independent: the reciprocal-step image of an unsettled rational case is unsettled
+at exactly the same cutoff.
+
+A fourth is the carrier question in its kernel form. \Cref{prop:collapse} shows
+that at a discrete Wallach point the reproducing kernel \eqref{eq:bergman}
+collapses onto a model in finitely many variables, and at integer rank the number
+of variables is the rank of the orbit carrying the corresponding Riesz measure
+\cite[Prop.~VII.2.3]{FK}. That is an identity between two indices, established
+here for the formal model only. What is not established, and is the natural
+successor to \Cref{prop:bernstein}, is whether any genuine Hilbert space of
+functions reproduces $B_{N,r,s}$ at nonintegral $r$ --- a carrier for the
+fractional Wallach set that is a kernel rather than a determinant.
+\Cref{prop:bernstein} obstructs the polynomial determinant carrier; it says
+nothing about a reproducing one, and the positivity computed in
+Sections~\ref{sec:wallach}--\ref{sec:arith} is exactly the hypothesis such a
+carrier would need.
 
 \bigskip
-\noindent\textbf{Supplementary material.} A frozen archive at
-\href{https://github.com/johnzfitch}{\texttt{github.com/johnzfitch}}, deposited
-with a DOI and corresponding to a tagged Git commit, contains the exact-arithmetic
-verification code, the figure sources, an environment lockfile, a manifest of
-SHA-256 digests, and the complete finite-cutoff data. The script
-\texttt{verify\_positivity.py} recomputes all displayed loci, erosion degrees, and
-tabulated finite-cutoff examples of Sections~\ref{sec:wallach}--\ref{sec:dual} by
-exact cell decomposition and exhaustive partition checks. Those scripts verify the
-stated computational instances; the analytic proofs and the identifications with
-the literature are independent of the computation.
+\noindent\textbf{Supplementary material.} The exact-arithmetic verification
+code, figure sources, environment lockfile, SHA-256 manifest, and finite-cutoff
+data for this revision are release v1.1.0 of
+\href{https://github.com/johnzfitch/gindikin-rank}{\texttt{github.com/johnzfitch/gindikin-rank}},
+archived under DOI
+{\urlstyle{same}\href{https://doi.org/10.5281/zenodo.21713316}{\nolinkurl{10.5281/zenodo.21713316}}},
+which also covers the earlier revision (v1.0.0). The script
+\texttt{ancillary\_census.py} emits the three quantitative receipts that
+\Cref{sec:erosion} leaves to the supplement, and \texttt{verify\_positivity.py}
+recomputes all displayed loci, erosion degrees, and tabulated finite-cutoff
+examples of Sections~\ref{sec:wallach}--\ref{sec:dual} by exact cell
+decomposition and exhaustive partition checks. The scripts verify the stated
+computational instances; the analytic proofs and the identifications with the
+literature do not depend on them.
+
+\appendix
+
+\section{Notation Crosswalk with Ruijsenaars's Multiple Zeta}
+\label{app:ruij}
+
+\Cref{lem:sector} imports one analytic fact from \cite{Ruij}. Ruijsenaars writes
+$\zeta_N(s,w\mid a_1,\dots,a_N)$ for the multiple zeta function and builds it
+from $f(t)=t^{N}\prod_{j=1}^{N}(1-e^{-a_jt})^{-1}$ \cite[(3.1)]{Ruij}. The
+present case is $N=2$ with $a_1=1$ and $a_2=h$, so that $f(t)=t^{2}K(t)$ for the
+kernel $K$ of \eqref{eq:mellin}. Under that specialization the dictionary is the
+following.
+
+\begin{center}
+\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\estabhead{Ruijsenaars \cite{Ruij}} & \estabhead{Here} & \estabhead{Where}\\
+\midrule
+$N$, $(a_1,a_2)$ & $2$, $(1,h)$ & \eqref{eq:mellin}\\
+$f(t)=t^{N}\prod_j(1-e^{-a_jt})^{-1}$ & $t^{2}K(t)$ & \cite[(3.1)]{Ruij}\\
+$s$ & $z$ & \eqref{eq:mellin}\\
+$w$ & $a$ & \eqref{eq:mellin}\\
+$\zeta_2(s,w\mid1,h)$ & $\Zt(z,a\mid1,h)$ & \eqref{eq:mellin}\\
+$\Psi_N(w)=\partial_s\zeta_N(s,w)\big|_{s=0}$ & $\Fh(a)$ & \cite[(3.12)]{Ruij}\\
+truncation order $M'$ & $M+2$ & \eqref{eq:zetaexp}\\
+Taylor coefficients of $f$ through $M'$ & $c_n(h)$ for $n\le M'-2$ & \eqref{eq:zetaexp}\\
+remainder (3.14) & $\rho_M(z,a)$ & \Cref{lem:sector}\\
+bound (3.15), $O(|w|^{\,N-M'-1})$ & $O(\lvert a\rvert^{-M-1})$ & \Cref{lem:sector}\\
+logarithmic coefficient $-\tfrac12B_{2,2}(w)$ & $-Q_h(a)$ & \Cref{thm:duality}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\smallskip
+\noindent
+Two consequences are worth stating explicitly. First, because $\Psi_N$ is already
+the $z$-derivative at $z=0$, the expansion \cite[(3.13)]{Ruij} is the
+differentiated one and no further passage through $\partial_z$ is needed. Second,
+the truncation indices differ by $N=2$: he subtracts the Taylor coefficients of
+$f$ through order $M'$, which are the $c_n(h)$ of \eqref{eq:zetaexp} for
+$n\le M'-2$, so $M'=M+2$ and his $O(|w|^{\,N-M'-1})$ is our
+$O(\lvert a\rvert^{-M-1})$.
 
 \begin{thebibliography}{99}
 

@@ -52,7 +52,7 @@ import time
 from contextlib import redirect_stdout
 from fractions import Fraction as F
 
-# The three suites this driver runs. They are kept as separate modules
+# The four suites this driver runs. They are kept as separate modules
 # because each was written against a specific review round and each is
 # independently runnable; this file is the union.
 SUITES = [
@@ -73,6 +73,13 @@ SUITES = [
      "cage, monotonicity, constancy on strata, the irrational obstruction), "
      "the unbounded negative-rank locus, the nu=0 cell, the restated "
      "falling-factorial lemma, and the nu=1 case of Corollary 10.7."),
+    ("figure",
+     "verify_figure3",
+     "Every claim displayed in Figure 3: that the paper's own integer-rank "
+     "theorem reproduces the ladder-plus-ray the left panel pairs with the "
+     "flag of boundary strata, and that the right panel's retained grid, "
+     "band, balanced point, cap and absent ray are what Theorem 9.1, "
+     "Proposition 9.3 and eq. (maxlocus) give."),
 ]
 
 QUICK = {"core"}
