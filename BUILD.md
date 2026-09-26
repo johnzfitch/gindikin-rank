@@ -1072,5 +1072,10 @@ What changed against revision 10:
 
 Verification for this release: `python3 verify_positivity.py` ends with
 `ALL COMPUTATIONAL CLAIMS OF SECTIONS 8-11 VERIFIED` (87 checks in four suites plus
-the in-file extras, 0 failed, about 20 s on Python 3.14.6); `ancillary_census.py`,
-`verify_figure3.py` and `recompute_table.py` run clean.
+the in-file extras, 0 failed, about 25 s on Python 3.14.6 with SymPy 1.14.0 and
+mpmath 1.3.0); `ancillary_census.py`, `verify_figure3.py` and
+`recompute_table.py` run clean. The Figure 3 suite and `ancillary_census.py`
+import `figs/wallach_locus.py`, which needs SymPy; revision 10's
+`requirements.txt` still said the verification was standard library only, and
+this release corrects it. Without SymPy the full run reports
+`FAILED SUITES: figure`, and `--quick` still passes.

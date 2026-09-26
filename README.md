@@ -35,9 +35,16 @@ python3 verify_positivity.py --quick    # core suite only
 python3 verify_positivity.py --list     # what each suite covers
 ```
 
-No third-party package is required. Every positivity decision is made in exact
-rational arithmetic (`fractions.Fraction`); no floating point enters any of
-them. Expected final line:
+Every suite except `figure` needs only the standard library, and `--quick` runs
+the core suite alone. The `figure` suite (`verify_figure3.py`) and
+`ancillary_census.py` also need SymPy (`pip install sympy==1.14.0`), which
+`figs/wallach_locus.py` uses for exact root-finding; without it the full run
+ends with `FAILED SUITES: figure`.
+Every positivity decision is made in exact arithmetic (`fractions.Fraction`,
+or SymPy's exact algebraic numbers in the locus routine); no floating point
+enters any of them. The one floating-point computation is the Remark 8.2
+counterexample in `verify_figure3.py`, a concavity check done with mpmath at 30
+digits. Expected final line:
 
 ```
 ALL COMPUTATIONAL CLAIMS OF SECTIONS 8-11 VERIFIED

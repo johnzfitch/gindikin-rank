@@ -19,7 +19,7 @@ the Git commit it was cut from. Regenerate with `python3 tools/manifest.py`.
 | `bfun/cubic_sextonion.txt` | 159 | `b991df306ceb703b...` | Bernstein-Sato input for the sextonionic cubic (Singular / Macaulay2 / Risa-Asir). |
 | `bfun/sextonion.py` | 3509 | `f216117858044373...` | Sextonionic cubic norm, generated for the b-function computation. |
 | `bfun/target_sextonion.sing` | 434 | `f108a7830b15762e...` | Bernstein-Sato input for the sextonionic cubic (Singular / Macaulay2 / Risa-Asir). |
-| `BUILD.md` | 62461 | `78e03aaeee68cba6...` | Build instructions, revision history, and the full record of what each round changed and verified. |
+| `BUILD.md` | 62798 | `5e285d06dde25073...` | Build instructions, revision history, and the full record of what each round changed and verified. |
 | `CITATION.cff` | 1295 | `cd417dfa12940468...` | Citation metadata. |
 | `figs/es_figure.py` | 6874 | `317345752fbc0769...` | Vendored figure-style helper from the Etch & Sketch kit. |
 | `figs/etch-and-sketch.mplstyle` | 5125 | `f81bb07b06bff603...` | Vendored matplotlib style; body-font and Type-42 settings. |
@@ -34,9 +34,9 @@ the Git commit it was cut from. Regenerate with `python3 tools/manifest.py`.
 | `gindikin-rank.pdf` | 676112 | `d17236e305d42b8a...` | Compiled paper, 54 pages. |
 | `gindikin-rank.tex` | 187849 | `ef95047f933703e5...` | Paper source. LuaLaTeX; see BUILD.md for the toolchain. |
 | `LICENSE` | 1359 | `3979e8f85623b942...` | CC BY 4.0 for the paper, MIT for the code. |
-| `README.md` | 5504 | `6acc7697552ef2b0...` | Orientation, quick start, layout, and what is and is not verified. |
+| `README.md` | 5991 | `41add8aa5d396acb...` | Orientation, quick start, layout, and what is and is not verified. |
 | `recompute_table.py` | 7956 | `c655ce07fee6f746...` | Standalone regeneration of Table 1 from scratch. |
-| `requirements.txt` | 590 | `71b27b6ebc018527...` | Pinned environment. Verification is standard library only. |
+| `requirements.txt` | 806 | `23b0f4a3cb22fe01...` | Pinned environment. Core verification is standard library only; the Figure 3 suite and the census need SymPy. |
 | `tools/manifest.py` | 530 | `ee0e060a752d32cd...` | Regenerates this manifest. |
 | `verify_figure3.py` | 8678 | `785ee3651ac9f26f...` | Checks every claim displayed in Figure 3, and Proposition 8.7. |
 | `verify_positivity.py` | 14609 | `aacf6dcac1ca40d8...` | ENTRY POINT. Runs every check below and reports one verdict. |
@@ -50,10 +50,10 @@ the Git commit it was cut from. Regenerate with `python3 tools/manifest.py`.
 e641757b2b90a211c5b01322bcd1eebb150300b8d2b56da152a61e4f1b645653  .gitattributes
 46262f3c49333ffb5ed97476b02dbfca0d89733647d7fa5b63a336f1983beda3  .gitignore
 26bea66684e16db91fe01711cd3887a8e704cebe4cbbade97d72ac0c5b27e8c6  .zenodo.json
-78e03aaeee68cba60a06e98aa18c9cf81c27224e9cf46debde903e2a6fb806e7  BUILD.md
+5e285d06dde2507375c8d9192ef563d478338a5b4d644c7130c9ac1a4ef7a23c  BUILD.md
 cd417dfa12940468788b34be21b6f391a4fc3bdb9b72704eec95d3f79f054653  CITATION.cff
 3979e8f85623b9426bc3db21222098a7d7363316d07d09fa85bb4a4cbca89958  LICENSE
-6acc7697552ef2b030569e931c31b73d48a18e98a1264ab7acd978dc125d0c04  README.md
+41add8aa5d396acbcf07e3c8f928d61a51b7839856e73bab4642f896b607c62b  README.md
 0ba106eec588dd0dcf6c591e3243b142fde3037663577b972cd1976906c6b7ae  ancillary_census.py
 2e36ee72933c5efec3e11f71161fcae1c3aa5628de08a93ebd4f5ca1395c04e1  bfun/bfun_sextonion.m2
 02429ee4c2ad484afb9e32c0105999d89cc825891bdd100af2a34468a614430e  bfun/bfun_sextonion.rr
@@ -75,7 +75,7 @@ cd1e18ff476206a6d2429855eab8302428c76f271fbfe488b900ca2fa3fcaeec  figs/locus_tai
 d17236e305d42b8ac47f12852a1884be926c46f8039f20e4f4187786729cb50c  gindikin-rank.pdf
 ef95047f933703e51396190676e9e97e5c0c14c75c28ba614e081378251fafd9  gindikin-rank.tex
 c655ce07fee6f7460419b09189712d322111f5db9ceac15d04abec27ff7c5d3b  recompute_table.py
-71b27b6ebc018527c5b3b0eaad8e5af0edddaeae584093212afcdd44287b981f  requirements.txt
+23b0f4a3cb22fe015801543e581937fb3a9099f504907b40fa4c06ac85c27067  requirements.txt
 ee0e060a752d32cdacd5a48ed3a9af569c5d3578af906617b11ccc5f29077f1d  tools/manifest.py
 785ee3651ac9f26fcadf892bf2fe28e62e624ab3d0ba561253931e94df43e190  verify_figure3.py
 aacf6dcac1ca40d8f8de7acbc92ae33f6c055a1ba6d9a9ca502becb555a696ad  verify_positivity.py
