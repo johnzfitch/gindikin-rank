@@ -9,8 +9,8 @@ Frozen archive accompanying the paper
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21713316.svg)](https://doi.org/10.5281/zenodo.21713316)
 
-**DOI:** [10.5281/zenodo.21713316](https://doi.org/10.5281/zenodo.21713316) (all versions; resolves to the latest). Version DOIs: [10.5281/zenodo.22975670](https://doi.org/10.5281/zenodo.22975670) is `v1.1.0`, and [10.5281/zenodo.21713317](https://doi.org/10.5281/zenodo.21713317) is `v1.0.0`.
-**Release:** [`v1.1.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.1.0) (commit [`4602947`](https://github.com/johnzfitch/gindikin-rank/commit/4602947d239e4cc2d9a0b6bd51679faf063225a5)), the September 2026 revision of the paper. The July 2026 archive is [`v1.0.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.0.0) (commit [`05f8878`](https://github.com/johnzfitch/gindikin-rank/commit/05f88789e6db22d5ba6413880f3c3ef4256078e6)).
+**DOI:** [10.5281/zenodo.21713316](https://doi.org/10.5281/zenodo.21713316) (all versions; resolves to the latest). Version DOIs: [10.5281/zenodo.22987448](https://doi.org/10.5281/zenodo.22987448) is `v1.1.1`, [10.5281/zenodo.22975670](https://doi.org/10.5281/zenodo.22975670) is `v1.1.0`, and [10.5281/zenodo.21713317](https://doi.org/10.5281/zenodo.21713317) is `v1.0.0`.
+**Release:** [`v1.1.1`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.1.1) (commit [`1a54cc0`](https://github.com/johnzfitch/gindikin-rank/commit/1a54cc0c53452538a44c8a26d7c9abcb338e1dbc)), the proofread September 2026 revision of the paper; its code and data are those of [`v1.1.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.1.0) (commit [`4602947`](https://github.com/johnzfitch/gindikin-rank/commit/4602947d239e4cc2d9a0b6bd51679faf063225a5)). The July 2026 archive is [`v1.0.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.0.0) (commit [`05f8878`](https://github.com/johnzfitch/gindikin-rank/commit/05f88789e6db22d5ba6413880f3c3ef4256078e6)).
 
 ## What changed in v1.1.1
 
