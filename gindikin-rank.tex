@@ -532,7 +532,7 @@ Lerch formula~\eqref{eq:lerch},
   \label{eq:Fdiff}
 \end{equation}
 Apply \eqref{eq:Fdiff} at the two endpoints $a_1=s+h-rh$ and $a_2=s+h$ of
-\eqref{eq:logG}. The prefactor $A(r)\log(2\pi)$ does not depend on $s$ and
+\eqref{eq:logG}. The prefactor $A_h(r)\log(2\pi)$ does not depend on $s$ and
 cancels, the two Lerch constants cancel against each other, and the $\log h$
 terms combine to $(a_2-a_1)h^{-1}\log h=r\log h$. What remains is
 \begin{equation*}
@@ -772,10 +772,9 @@ determinants and prehomogeneous relative invariants are the principal examples,
 but no such structure is required of $f$.
 \end{corollary}
 
-The classical Jordan determinant satisfies \eqref{eq:affinecompat} exactly: by
-\eqref{eq:b-is-shift} the
+By \eqref{eq:b-is-shift} the
 classical Jordan determinant of a rank-$N$ simple Euclidean Jordan algebra
-saturates \eqref{eq:affinecompat} exactly, with $a=-1$, $\beta=-1$ and
+satisfies \eqref{eq:affinecompat} exactly, with $a=-1$, $\beta=-1$ and
 $c=(-1)^{N}$. What \Cref{prop:bernstein} adds is that no other value of $r$ can
 do so. Both directions of the integer condition are used: nonintegral $r$ is
 excluded by the infinitude of the divisor, and negative integral $r$ is excluded
@@ -901,6 +900,7 @@ logarithmic lift, and the function-level characters that remain. We then analyse
 growth and prove uniqueness under a spectral ratio normalization.
 
 \subsection{Integer Values Alone Do Not Determine the Continuation}
+\label{sec:intvalues}
 
 Agreement on integer ranks alone gives no useful uniqueness: additive tails such
 as $\Gc_h(r,s)+\sin(2\pi r)$ vanish on the lattice and are unconstrained off it.
@@ -1217,13 +1217,13 @@ also bounded away from zero along some sequence. The $\limsup$ is therefore $0$
 and no ordinary limit exists.
 \end{proof}
 
-Part (i) sharpens what agreement at
+First, part (i) sharpens what agreement at
 integer ranks is worth: the periodic-coboundary subfamily of
 \Cref{thm:ambiguity} agrees with $\Gc_h$ not merely on $\Zint$ but on the lattice
 $\tfrac1p\Zint$, which is $p$ times finer. The rank characters do not, since
 $e^{2\pi ikr}$ is generally nontrivial there. Integer agreement is a
 considerably weaker constraint than it appears, and this is the precise sense in
-which the additive witnesses of the previous subsection are inadequate: they are
+which the additive witnesses of Section~\ref{sec:intvalues} are inadequate: they are
 valid against interpolation constrained only on the integer lattice, and
 insufficient against the full cocycle-compatible package.
 
@@ -1725,7 +1725,7 @@ Write $\xi_{ij}=(i-1)D-(j-1)$ for the cell roots and
   \label{eq:cellmult}
 \end{equation}
 for the number of admitted diagrams containing the cell $(i,j)$. Then the Gram
-matrix $G_N(r,s)$ of the pairing on $V_N$, in the Jack basis, is diagonal with
+matrix $G_N(r,s)$ of the pairing on $V_N^{\Rr}$, in the Jack basis, is diagonal with
 entries $\pi_\lambda(s)$, and
 \begin{equation}
   \det G_N(r,s)\;=\;C_{N,D}
@@ -2840,7 +2840,7 @@ $b\nu\notin\Zint$ & none, at any row
   & finite rational sign stratification\\
 $b\nu\in\Zint$, $\nu\notin\Zint$ & later-row principal ideal
   & ideal together with finite stratification\\
-$\nu\in\Zint_{>0}$ & first-subdiagonal ideal
+$\nu\in\Zint_{>0}$ & first-sub-diagonal ideal
   & exact falling-factorial staircase\\
 \bottomrule
 \end{tabular}
@@ -2935,7 +2935,7 @@ nondegenerate chamber exists at all.
 
 When the defect is a positive integer, the entire integral-defect
 classification --- the exact locus at each cutoff, the all-degree locus, the
-stabilization degree, and every erosion event --- follows from one
+stabilization degree, and every erosion event --- follows from a single
 one-dimensional identity. On the terminal chamber the pivot is a product of two
 falling factorials, and the whole sign analysis reduces to reading their signs.
 
@@ -3518,7 +3518,7 @@ $(3,2)$ in the rank-null ideal, so every $\lambda$ with $\lambda_3\ge2$ is
 identically null, minimally $(2,2,2)$. That partition first fits at $N=6$, so for
 $N<6$ the open band is positive definite, while for $N\ge6$ it is semidefinite but
 not definite and becomes definite only after quotienting the ideal. Either way the
-fractional-rank positivity is compatible with quotient or non-polynomial
+fractional-rank positivity is compatible with quotient or nonpolynomial
 realizations, but does not construct one. It therefore does not conflict with
 \Cref{prop:bernstein}, which obstructs compatible \emph{polynomial}
 Bernstein--Sato realizations rather than positive forms.
@@ -3558,7 +3558,7 @@ below it remains unclassified.
 \subsection{Open Problems}
 
 The remaining question is not whether fractional rank is analytically meaningful,
-but whether its positive forms admit a natural nonpolynomial carrier. Three
+but whether its positive forms admit a natural nonpolynomial carrier. Four
 directions remain open. The first is the effective content of
 \Cref{thm:ratstab}: the stabilization degree and the closed form at rational
 nonintegral defect, where stabilization is now known to occur but no threshold is
@@ -3571,7 +3571,7 @@ of the negative-rank loci, beyond the positive-rank families that
 independent: the reciprocal-step image of an unsettled rational case is unsettled
 at exactly the same cutoff.
 
-A fourth is the carrier question in its kernel form. \Cref{prop:collapse} shows
+The fourth is the carrier question in its kernel form. \Cref{prop:collapse} shows
 that at a discrete Wallach point the reproducing kernel \eqref{eq:bergman}
 collapses onto a model in finitely many variables, and at integer rank the number
 of variables is the rank of the orbit carrying the corresponding Riesz measure
@@ -3698,7 +3698,7 @@ Adv.\ Math.\ \textbf{201} (2006), no.~1, 143--179.
 Oxford Mathematical Monographs, Clarendon Press, Oxford, 1995; Ch.~VI, \S10.
 
 \bibitem{Petrov} L.~Petrov,
-\emph{The Jack $z$-measures and their degenerations},
+\emph{$\mathfrak{sl}(2)$ operators and Markov processes on branching graphs},
 \texttt{arXiv:1111.3399}.
 
 \bibitem{PerezMarco} R.~P\'erez-Marco,

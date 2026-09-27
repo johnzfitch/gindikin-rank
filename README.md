@@ -12,6 +12,15 @@ Frozen archive accompanying the paper
 **DOI:** [10.5281/zenodo.21713316](https://doi.org/10.5281/zenodo.21713316) (all versions; resolves to the latest). Version DOIs: [10.5281/zenodo.22975670](https://doi.org/10.5281/zenodo.22975670) is `v1.1.0`, and [10.5281/zenodo.21713317](https://doi.org/10.5281/zenodo.21713317) is `v1.0.0`.
 **Release:** [`v1.1.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.1.0) (commit [`4602947`](https://github.com/johnzfitch/gindikin-rank/commit/4602947d239e4cc2d9a0b6bd51679faf063225a5)), the September 2026 revision of the paper. The July 2026 archive is [`v1.0.0`](https://github.com/johnzfitch/gindikin-rank/releases/tag/v1.0.0) (commit [`05f8878`](https://github.com/johnzfitch/gindikin-rank/commit/05f88789e6db22d5ba6413880f3c3ef4256078e6)).
 
+## What changed in v1.1.1
+
+* **The paper only.** A proofreading pass over the September 2026 revision: prose,
+  typesetting and one citation title. No mathematics, statement, proof or number changed, and
+  every theorem, proposition, lemma, corollary, equation and citation number is the same as in
+  v1.1.0. `BUILD.md` lists each change. Still 60 pages.
+* **Code and data are unchanged** from v1.1.0; the paper's supplementary-material note still
+  points to v1.1.0, which remains accurate for the scripts.
+
 ## What changed in v1.1.0
 
 * **The paper** is the September 2026 revision: revision 10 of the source (August 2026) with a

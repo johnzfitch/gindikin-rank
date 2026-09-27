@@ -1079,3 +1079,30 @@ import `figs/wallach_locus.py`, which needs SymPy; revision 10's
 `requirements.txt` still said the verification was standard library only, and
 this release corrects it. Without SymPy the full run reports
 `FAILED SUITES: figure`, and `--quick` still passes.
+
+## Proofread (release v1.1.1)
+
+A proofreading pass over the September 2026 build. Prose, typesetting and one citation title
+only; no mathematics, statement, proof or numbering changed. Rebuilt: 60 pages, 0 overfull
+boxes, `tools/pagecheck.py` reports no faults, and every `
+ewlabel` and `ibcite` in the
+`.aux` keeps its number and page (one label, `sec:intvalues`, was added so a reference can
+point to Section 7.1).
+
+- Proof of Theorem 4.2: "The prefactor A(r) log(2 pi)" -> "A_h(r) log(2 pi)", the notation
+  used everywhere else.
+- Section 6.2: a doubled sentence ("The classical Jordan determinant satisfies (28) exactly: by
+  (27) the classical Jordan determinant ... saturates (28) exactly") is now one sentence.
+- Section 7.4: "Part (i) sharpens" -> "First, part (i) sharpens" (the next paragraph begins
+  "Second,"); "the additive witnesses of the previous subsection" -> "of Section 7.1", where
+  they are.
+- Proposition 8.2: "the pairing on V_N" -> "on V_N^R", the space Definition 8.1 defines.
+- Table 2: "first-subdiagonal" -> "first-sub-diagonal", as in the four other occurrences.
+- Section 10.2: "follows from one one-dimensional identity" -> "from a single one-dimensional
+  identity".
+- Section 12.2: "non-polynomial" -> "nonpolynomial", the paper's spelling elsewhere.
+- Section 12.3: "Three directions remain open" ... "A fourth is" -> "Four directions remain
+  open" ... "The fourth is".
+- Reference [13]: the title given for Petrov, arXiv:1111.3399, was "The Jack z-measures and
+  their degenerations"; the arXiv record for that identifier is "sl(2) Operators and Markov
+  Processes on Branching Graphs", and the entry now says so.
