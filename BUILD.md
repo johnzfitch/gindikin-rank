@@ -1084,8 +1084,7 @@ this release corrects it. Without SymPy the full run reports
 
 A proofreading pass over the September 2026 build. Prose, typesetting and one citation title
 only; no mathematics, statement, proof or numbering changed. Rebuilt: 60 pages, 0 overfull
-boxes, `tools/pagecheck.py` reports no faults, and every `
-ewlabel` and `ibcite` in the
+boxes, `tools/pagecheck.py` reports no faults, and every `\newlabel` and `\bibcite` in the
 `.aux` keeps its number and page (one label, `sec:intvalues`, was added so a reference can
 point to Section 7.1).
 
@@ -1106,3 +1105,31 @@ point to Section 7.1).
 - Reference [13]: the title given for Petrov, arXiv:1111.3399, was "The Jack z-measures and
   their degenerations"; the arXiv record for that identifier is "sl(2) Operators and Markov
   Processes on Branching Graphs", and the entry now says so.
+
+## Corrections (release v1.1.2)
+
+Rebuilt: 60 pages, 0 overfull boxes, `tools/pagecheck.py` reports no faults, and every
+`\newlabel` keeps its number and page. Bibliography numbers change by the reorder only.
+
+- Lemma 7.6. The statement bounded d/dz rho_M(0,a) by O(|a|^{-M-1}). Since
+  rho_M = Gamma(z) E_M(z,a) and E_M(0,a) = 0, d/dz rho_M(0,a) = (1/2) E_M''(0,a) - gamma E_M'(0,a),
+  and termwise it behaves like c_{M+1}(h) M! (psi(M+1) - log a) a^{-M-1}: an extra log|a|.
+  Checked numerically (mpmath, 40 digits; h = 1, 2; M = 2; |a| = 10 to 80; arg a = 0 and 2.5):
+  |a|^3 |rho_M(0,a)| is constant (0.0028 at h = 1, 0.0125 at h = 2) while |a|^3 |d/dz rho_M(0,a)|
+  grows like log|a|. The lemma now states E_M(0,a) = 0 and bounds rho_M(0,a) = d/dz E_M(0,a),
+  the quantity Proposition 7.7 extends to the slit sector; that proof is unchanged. Appendix A:
+  "remainder (3.14)" now maps to rho_M(0,a) = d/dz E_M(0,a).
+- Section 8.2: the Petrov sentence now reads that Petrov [Thm. 9.3 and Section 9.4.2]
+  characterizes the Jack z-measures, with all their degenerations, as the measures produced by
+  triplets of sl(2) (Kerov) operators on the Young graph with Jack edge multiplicities.
+- Section 7 (after (45)): "(s+h(1-r))^{+-}" -> "(s+h(1-r))^m, m in {2,1} or m <= -1".
+- Section 11: "splits further along the middle row of Table 2" -> "into the first two rows".
+- Section 9: "no first-row cell (k+1, nu+1)" -> "the first sub-diagonal row contains no
+  integral cell (k+1, nu+1)".
+- Section 8: the kernel parameter K_nu -> K_tau, since nu is the defect elsewhere.
+- Bibliography alphabetized: Boas 4->3, Borodin-Olshanski 3->4, Gindikin 9->8, Kimura 10->9,
+  Landsberg-Manivel 11->10, Macdonald 12->11, Perez-Marco 14->12, Ruijsenaars 8->14.
+- American spelling (behavior, canceling, analyze, neighborhood, centered, labeled, gray;
+  "null space"), including the Figure 2 legend; `figs/make_figures.py` changed in that one
+  label and Figure 2 was regenerated.
+- A paragraph break before "The first structural fact" in Section 9.

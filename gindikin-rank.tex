@@ -60,7 +60,7 @@ unit-shift quotient is rational exactly for $r\in\Zint$ and polynomial exactly
 for $r\in\Zint_{\ge0}$; consequently no polynomial Bernstein--Sato datum
 affine-compatible with this quotient exists away from the nonnegative integer
 lattice. We classify all entire multipliers preserving the cocycle and both unit
-shifts, determine their behaviour under reciprocal steps, and show that a
+shifts, determine their behavior under reciprocal steps, and show that a
 sectorial large-$s$ ratio normalization selects $\Gc_h$ uniquely.
 
 Writing $d=2h$, we then study a formal Jack--Riesz pairing with the same rank and
@@ -655,7 +655,7 @@ two share the grid $h\Zint$, the negative tails coincide and cancel, and
 finitely many zeros survive, so $\Rm_{r,h}$ is a polynomial when
 $r\in\Zint_{\ge0}$ and reciprocal-polynomial when $r$ is a negative integer. At nonintegral $r$
 the zero lattice sits on a different coset of $h\Zint$, the tails interleave
-without cancelling, and infinitely many poles and zeros remain.}
+without canceling, and infinitely many poles and zeros remain.}
 \label{fig:divisor}
 \end{figure}
 
@@ -681,7 +681,7 @@ at $s\in\{h(r-1),h(r-2),h(r-3),\dots\}$. These are two arithmetic progressions
 with common difference $h$: the poles lie on the coset $h\Zint$, the zeros on the
 coset $h(r-1)+h\Zint$. The two cosets coincide exactly when $r-1\in\Zint$, that
 is when $r\in\Zint$; then the deep-negative tails of the two progressions agree
-term for term and cancel, leaving only finitely many uncancelled points ---
+term for term and cancel, leaving only finitely many uncanceled points ---
 which \Cref{thm:term}'s integer branches identify. When $r\notin\Zint$ the two
 cosets are disjoint, so no pole meets any zero; both progressions survive in
 full, and $\Rm_{r,h}$ has infinitely many poles and zeros. A nonzero rational
@@ -896,7 +896,7 @@ The functional equations do not determine the continuation without an additional
 normalization. We first classify their holomorphic logarithmic deformations, then
 impose the two unit shifts and the integer-rank data. This isolates the periodic
 ambiguity at rational $h$, its disappearance at irrational $h$ for a fixed
-logarithmic lift, and the function-level characters that remain. We then analyse
+logarithmic lift, and the function-level characters that remain. We then analyze
 growth and prove uniqueness under a spectral ratio normalization.
 
 \subsection{Integer Values Alone Do Not Determine the Continuation}
@@ -1297,11 +1297,14 @@ and ours is tabulated in \Cref{app:ruij}.
 \label{lem:sector}
 Fix $h>0$, $M\ge1$ and $\delta>0$, and let
 $\rho_M(z,a)=\Gamma(z)\Zt(z,a\mid1,h)-\sum_{n\le M}c_n(h)\Gamma(z+n)a^{-z-n}$ be
-the truncated remainder of \eqref{eq:zetaexp}. Then $\rho_M$, and its derivative
-in $z$ at $z=0$, continue holomorphically in $a$ from the right half-sector to
+the truncated remainder of \eqref{eq:zetaexp}, so that $\rho_M=\Gamma(z)E_M(z,a)$.
+At $z=0$ the terms $n=-2,-1,0$ of \eqref{eq:zetaexp} reproduce
+$\Zt(0,a\mid1,h)$ and the terms $n\ge1$ vanish, so $E_M(0,a)=0$; hence $\rho_M$ is
+holomorphic at $z=0$ with $\rho_M(0,a)=\partial_zE_M(0,a)$. Then $\rho_M(0,a)$
+continues holomorphically in $a$ from the right half-sector to
 $\Cc\setminus(-\infty,0]$, and
 \begin{equation*}
-  \partial_z\rho_M(0,a)\;=\;O\bigl(\lvert a\rvert^{-M-1}\bigr)
+  \rho_M(0,a)\;=\;\partial_zE_M(0,a)\;=\;O\bigl(\lvert a\rvert^{-M-1}\bigr)
   \qquad\text{uniformly on } \lvert\arg a\rvert\le\pi-\delta .
 \end{equation*}
 \end{lemma}
@@ -1394,7 +1397,7 @@ with $E_M(\,\cdot\,,a)$ holomorphic on $\{\Real z>-M-1\}$ and
   E_M(z,a)=O_{\mathcal{K},h,\varepsilon,M}\bigl(\lvert a\rvert^{-M-1}\bigr)
 \end{equation*}
 uniformly for $z\in\mathcal{K}$, by Watson's lemma applied to the subtracted
-integrand. Because that bound is uniform on a compact neighbourhood of $z=0$,
+integrand. Because that bound is uniform on a compact neighborhood of $z=0$,
 Cauchy's estimate on a fixed circle about $z=0$ transfers it to the derivative:
 \begin{equation}
   \partial_zE_M(0,a)=O_{h,\varepsilon,M}\bigl(\lvert a\rvert^{-M-1}\bigr).
@@ -1517,7 +1520,7 @@ Collecting, the difference of the two expansions produces $rs(\log s-1)$ from th
 quadratic and linear terms and $-A_h(r)\log s$ from the logarithmic ones, while
 the prefactor of \eqref{eq:logG} supplies $A_h(r)\log(2\pi)$. For each $n\ge1$
 the coefficient of $s^{-n}$ is obtained from finitely many binomial expansions of
-$\bigl(s+h(1-r)\bigr)^{\pm}$ and $\log\bigl(s+h(1-r)\bigr)$, so it is a
+$\bigl(s+h(1-r)\bigr)^{m}$, $m\in\{2,1\}$ or $m\le-1$, and of $\log\bigl(s+h(1-r)\bigr)$, so it is a
 polynomial in $r$, written $C_n(r;h)$, of degree at most $n+2$.
 
 It remains to identify $C_n$. At $r=N\in\Zint_{\ge0}$, \Cref{thm:intspec} gives
@@ -1766,9 +1769,10 @@ in this section is established background and what is not.
 Borodin and Olshanski classify the parameters giving strictly positive weights
 into a principal and a complementary series \cite[Prop.~1.2]{BO}, and exhibit row,
 column, and fat-hook degenerate series \cite[Prop.~1.3, Prop.~1.4]{BO}, the last
-supported exactly on diagrams contained in a fat hook; Petrov \cite{Petrov} later
-gives a characterization of the Jack $z$-measures together with their
-degenerations. Under the fixed-rank slice
+supported exactly on diagrams contained in a fat hook; Petrov \cite[Thm.~9.3 and \S9.4.2]{Petrov} later
+characterizes the Jack $z$-measures, together with all their degenerations, as
+the measures produced by triplets of $\mathfrak{sl}(2)$ (Kerov) operators on the
+Young graph with Jack edge multiplicities. Under the fixed-rank slice
 below, the integral-defect rank-null ideal is one of those fat-hook
 degenerations: the diagrams surviving it satisfy $\lambda_{k+1}\le\nu$, which is
 containment in the fat hook with arm $k$ and leg $\nu$. What is new here is the
@@ -1952,7 +1956,7 @@ differently, and it is the mechanism behind every continuous interval found in
 the rest of this section.
 
 One point of the chamber requires no hypothesis on the step at all, and it is
-the point the chamber is centred on.
+the point the chamber is centered on.
 
 At the balanced point $s=rD$
 the two factors of \eqref{eq:pivot} coincide, so
@@ -2031,7 +2035,7 @@ places \cite[Ch.~XIII]{FK}.
 
 Classically the Wallach set is not defined as a positivity locus of numbers. It
 is the set of parameters at which a \emph{kernel} is of positive type: for the
-tube domain over $\Omega$, the values of $\nu$ for which $\mathcal{K}_\nu$
+tube domain over $\Omega$, the values of $\tau$ for which $\mathcal{K}_\tau$
 reproduces some Hilbert space of holomorphic functions, the Bergman kernel being
 the member at the distinguished parameter \cite[Ch.~XIII, \S2]{FK}. The pairing of
 \Cref{def:jack} carries the same kernel, and recording it costs nothing because
@@ -2181,6 +2185,7 @@ a fixed rank strip $k-1<r<k$, the continuous dependence on $r$ enters through th
 defect $\nu=D(k-r)$; the integer $k=\lceil r\rceil$ separately fixes the critical
 row, the ladder length, the cap, the witness degrees and the stabilization
 threshold.
+
 The first structural fact is that continuing the rank changes the topology of the
 Wallach set.
 
@@ -2369,7 +2374,7 @@ annihilates are exactly
   \label{eq:nullsupport}
 \end{equation}
 the union running over every row index $i$ for which the associated $k_i$ is a
-nonnegative integer. The nullspace of the pairing at $s$ is spanned by the null
+nonnegative integer. The null space of the pairing at $s$ is spanned by the null
 basis modes
 \begin{equation}
   \bigl\{\lambda:F_{\lambda,D}(rD)=0\ \text{ or }\ F_{\lambda,D}(s)=0\bigr\},
@@ -2390,7 +2395,7 @@ reason rather than the spectral one: at $(\tfrac32,8)$ the mode
 $\lambda=(3,3,3)$ is null at $s=12$ because it contains the rank-null cell
 $(3,3)$, even though $F_{\lambda,4}(12)=188697600\ne0$ and the representation
 $s=(4-1)D-0$ would demand $\lambda_4\ge1$. Only the union
-\eqref{eq:nullsupport} together with the ideal describes the nullspace, which is
+\eqref{eq:nullsupport} together with the ideal describes the null space, which is
 why \eqref{eq:nullspace} carries both alternatives.
 
 The spectral lattice continues past the classical rank: at $(\tfrac32,8)$ there
@@ -2514,8 +2519,8 @@ $b\nu\in\Zint$; this is the existence criterion of \Cref{prop:idealfull}. When
 $\nu\in\Zint_{\ge0}$ the cell $(k+1,\nu+1)$ is rank-null by \eqref{eq:idealnu}
 and is minimal, giving (ii); at $\nu=0$ this is the integer-rank length ideal
 generated by $(k+1,1)$, with $k=r$, and \eqref{eq:mincell} returns it because
-$m=t_0=0$; when $b\nu\in\Zint$ but $\nu\notin\Zint$ no first-row cell
-$(k+1,\nu+1)$ is integral, so the minimal cell has $t_0\ge1$, giving (iii). For
+$m=t_0=0$; when $b\nu\in\Zint$ but $\nu\notin\Zint$ the first sub-diagonal row
+contains no integral cell $(k+1,\nu+1)$, so the minimal cell has $t_0\ge1$, giving (iii). For
 \eqref{eq:mincell}, the rank-null condition $(i-1)D-(j-1)=rD$ with $i=k+1+t$ reads
 $tD-(j-1)=-\nu$, i.e.\ $b(j-1)=m+at$; the least $t\ge0$ making the right side
 divisible by $b$ is $t_0$, and then $j-1=(m+at_0)/b$. Minimality and the
@@ -2758,8 +2763,8 @@ the cutoff, that ends the erosion.
 \begin{figure}[htbp]
 \centering
 \includegraphics{figs/fig4-positivity-loci.pdf}
-\caption{Positivity at integer and fractional rank; each row is labelled with the
-locus it shows, and the one finite-cutoff row carries a dashed rule. The grey
+\caption{Positivity at integer and fractional rank; each row is labeled with the
+locus it shows, and the one finite-cutoff row carries a dashed rule. The gray
 integer controls ($r=2,3$), governed by \Cref{thm:intrank}, carry the classical
 ladder and an unbounded ray. Every fractional row has $r=\tfrac32$, and its ray is
 replaced by a bounded band whose erosion is decided by the defect
@@ -3278,7 +3283,7 @@ $(\tfrac32,3)$ the steps are $D=3,5,\tfrac32$, all rational, so each locus is
 eventually constant. What is not settled for them is the stabilization degree and
 the closed form, and that is where the remaining work lies.
 
-The neighbouring chamber shows what integrality of the defect buys. On the open
+The neighboring chamber shows what integrality of the defect buys. On the open
 chamber $0<rD<1$ the sign of every rank factor is constant, since by
 \eqref{eq:pivot} each is affine in $rD$ and changes sign only at a lattice point,
 i.e.\ at the chamber boundary. Hence the fixed-cutoff locus is the same for all
@@ -3308,7 +3313,7 @@ unit-numerator family \Cref{bcor:unitstep} shows that no erosion occurs at any
 degree, so $N_0=k+1$; at integral defect \Cref{thm:ncut} gives the exact threshold
 $N_*=\nu(\lceil r\rceil+1)$. Outside those two regimes \Cref{thm:ratstab}
 guarantees stabilization but does not determine the least stabilizing cutoff, and
-nonintegral defect splits further along the middle row of \Cref{tab:regimes}. If
+nonintegral defect splits further into the first two rows of \Cref{tab:regimes}. If
 $b\nu\in\Zint$, \Cref{cor:defectideal} supplies a later-row principal rank-null
 ideal, which may truncate erosion by a mechanism distinct from the critical-row
 staircase. If $b\nu\notin\Zint$, no rank-null ideal exists at any row, so
@@ -3455,7 +3460,7 @@ mode survives.
 This is the positivity-side image of the shift quotient's value $\Rm_{0,h}(s)=1$ from
 \Cref{thm:shift}: the empty product read two ways, analytically a unit and
 functionally null. It is a statement about $r=0$ alone, and it is consistent with
-\Cref{thm:transpose}, which fixes $r=0$ for every $d$. No neighbourhood formula
+\Cref{thm:transpose}, which fixes $r=0$ for every $d$. No neighborhood formula
 for $r<0$ may be inferred from it, and none is asserted here.
 
 \section{Positivity Survives Where Polynomial Carriers Do Not}
@@ -3627,7 +3632,7 @@ $\zeta_2(s,w\mid1,h)$ & $\Zt(z,a\mid1,h)$ & \eqref{eq:mellin}\\
 $\Psi_N(w)=\partial_s\zeta_N(s,w)\big|_{s=0}$ & $\Fh(a)$ & \cite[(3.12)]{Ruij}\\
 truncation order $M'$ & $M+2$ & \eqref{eq:zetaexp}\\
 Taylor coefficients of $f$ through $M'$ & $c_n(h)$ for $n\le M'-2$ & \eqref{eq:zetaexp}\\
-remainder (3.14) & $\rho_M(z,a)$ & \Cref{lem:sector}\\
+remainder (3.14) & $\rho_M(0,a)=\partial_zE_M(0,a)$ & \Cref{lem:sector}\\
 bound (3.15), $O(|w|^{\,N-M'-1})$ & $O(\lvert a\rvert^{-M-1})$ & \Cref{lem:sector}\\
 logarithmic coefficient $-\tfrac12B_{2,2}(w)$ & $-Q_h(a)$ & \Cref{thm:duality}\\
 \bottomrule
@@ -3655,14 +3660,14 @@ Trans.\ Cambridge Philos.\ Soc.\ \textbf{19} (1904), 374--425.
 North-Holland Mathematical Library \textbf{21},
 North-Holland, Amsterdam, 1979.
 
+\bibitem{Boas} R.~P.~Boas,
+\emph{Entire Functions},
+Pure and Applied Mathematics \textbf{5}, Academic Press, New York, 1954.
+
 \bibitem{BO} A.~Borodin, G.~Olshanski,
 \emph{$z$-Measures on partitions and their scaling limits},
 European J.\ Combin.\ \textbf{26} (2005), no.~6, 795--834;
 preprint arXiv:math-ph/0210048.
-
-\bibitem{Boas} R.~P.~Boas,
-\emph{Entire Functions},
-Pure and Applied Mathematics \textbf{5}, Academic Press, New York, 1954.
 
 \bibitem{DGR} H.~Ding, K.~I.~Gross, D.~St.~P.~Richards,
 \emph{Ramanujan's master theorem for symmetric cones},
@@ -3675,10 +3680,6 @@ Oxford Mathematical Monographs, Clarendon Press, Oxford, 1994.
 \bibitem{FR} E.~Friedman, S.~Ruijsenaars,
 \emph{Shintani--Barnes zeta and gamma functions},
 Adv.\ Math.\ \textbf{187} (2004), 362--395.
-
-\bibitem{Ruij} S.~N.~M.~Ruijsenaars,
-\emph{On Barnes' multiple zeta and gamma functions},
-Adv.\ Math.\ \textbf{156} (2000), no.~1, 107--132.
 
 \bibitem{Gindikin} S.~G.~Gindikin,
 \emph{Analysis in homogeneous domains},
@@ -3697,13 +3698,17 @@ Adv.\ Math.\ \textbf{201} (2006), no.~1, 143--179.
 \emph{Symmetric Functions and Hall Polynomials}, 2nd ed.,
 Oxford Mathematical Monographs, Clarendon Press, Oxford, 1995; Ch.~VI, \S10.
 
+\bibitem{PerezMarco} R.~P\'erez-Marco,
+\emph{On the definition of higher Gamma functions},
+Constr.\ Approx.\ \textbf{61} (2025), 413--443.
+
 \bibitem{Petrov} L.~Petrov,
 \emph{$\mathfrak{sl}(2)$ operators and Markov processes on branching graphs},
 \texttt{arXiv:1111.3399}.
 
-\bibitem{PerezMarco} R.~P\'erez-Marco,
-\emph{On the definition of higher Gamma functions},
-Constr.\ Approx.\ \textbf{61} (2025), 413--443.
+\bibitem{Ruij} S.~N.~M.~Ruijsenaars,
+\emph{On Barnes' multiple zeta and gamma functions},
+Adv.\ Math.\ \textbf{156} (2000), no.~1, 107--132.
 
 \bibitem{Stanley} R.~P.~Stanley,
 \emph{Some combinatorial properties of Jack symmetric functions},

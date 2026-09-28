@@ -249,7 +249,7 @@ def figure_two(path):
         Line2D([], [], marker="o", ls="none", ms=4.6, mfc="none", mec=WINE,
                mew=1.0, label=r"pole of $R_{r,h}$"),
         Line2D([], [], marker="o", ls="-", ms=4.6, mfc=GREY, mec=GREY,
-               color=GREY, alpha=0.5, label=r"cancelling pair"),
+               color=GREY, alpha=0.5, label=r"canceling pair"),
     ]
     ax.legend(handles=handles, loc="upper center",
               bbox_to_anchor=(0.5, -0.19), ncol=3,
